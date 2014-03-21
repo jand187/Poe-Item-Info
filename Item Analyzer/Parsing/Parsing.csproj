@@ -39,8 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddedDamageRangeMod.cs" />
+    <Compile Include="AddedPercentageMod.cs" />
+    <Compile Include="AddedValueMod.cs" />
+    <Compile Include="IItemMod.cs" />
     <Compile Include="ModParser.cs" />
+    <Compile Include="PercentageIncreaseMod.cs" />
+    <Compile Include="PercentageLeechedMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegenerationMod.cs" />
+    <Compile Include="UnknownMod.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
