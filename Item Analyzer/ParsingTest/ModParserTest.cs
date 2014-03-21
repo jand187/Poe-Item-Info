@@ -14,11 +14,11 @@ namespace ParsingTest
 		{
 			const string text = "21% increased Elemental Damage with Weapons";
 
-			var result = new ModParser().ParseLine(text);
+			var result = new ModParser().ParseLine(text) as PercentageIncreaseMod;
 
+			result.Should().NotBeNull();
 			result.Name.Should().Be("increased Elemental Damage with Weapons");
 			result.Value.Should().Be("21");
-			result.GetType().Should().Be(typeof(PercentageIncreaseMod));
 		}
 
 		[Fact]
@@ -26,11 +26,11 @@ namespace ParsingTest
 		{
 			const string text = "+43 to Armour";
 
-			var result = new ModParser().ParseLine(text);
+			var result = new ModParser().ParseLine(text) as AddedValueMod;
 
+			result.Should().NotBeNull();
 			result.Name.Should().Be("to Armour");
 			result.Value.Should().Be("43");
-			result.GetType().Should().Be(typeof(AddedValueMod));
 		}
 
 		[Fact]
@@ -38,11 +38,11 @@ namespace ParsingTest
 		{
 			const string text = "+11% to Lightning Resistance";
 
-			var result = new ModParser().ParseLine(text);
+			var result = new ModParser().ParseLine(text) as AddedPercentageMod;
 
+			result.Should().NotBeNull();
 			result.Name.Should().Be("to Lightning Resistance");
 			result.Value.Should().Be("11");
-			result.GetType().Should().Be(typeof(AddedPercentageMod));
 		}
 
 		[Fact]
@@ -50,9 +50,13 @@ namespace ParsingTest
 		{
 			const string text = "Adds 9-15 Fire Damage";
 
-			var result = new ModParser().ParseLine(text);
-
-			Assert.False(true);
+			var result = new ModParser().ParseLine(text) as AddedDamageRangeMod;
+		
+			result.Should().NotBeNull();
+			result.Name.Should().Be("Fire Damage");
+			result.Value.Should().Be("9-15");
+			result.MinValue.Should().Be(9);
+			result.MaxValue.Should().Be(15);
 		}
 
 		[Fact]
@@ -60,9 +64,11 @@ namespace ParsingTest
 		{
 			const string text = "3.8 Life Regenerated per second";
 
-			var result = new ModParser().ParseLine(text);
+			var result = new ModParser().ParseLine(text) as RegenerationMod;
 
-			Assert.False(true);
+			result.Should().NotBeNull();
+			result.Name.Should().Be("Life Regenerated per second");
+			result.Value.Should().Be("3.8");
 		}
 
 		[Fact]
@@ -70,9 +76,11 @@ namespace ParsingTest
 		{
 			const string text = "1% of Physical Attack Damage Leeched as Life";
 
-			var result = new ModParser().ParseLine(text);
-
-			Assert.False(true);
+			var result = new ModParser().ParseLine(text) as PercentageLeechedMod;
+			
+			result.Should().NotBeNull();
+			result.Name.Should().Be("of Physical Attack Damage Leeched as Life");
+			result.Value.Should().Be("1");
 		}
 
 		[Fact]

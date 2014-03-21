@@ -12,11 +12,14 @@ namespace Parsing
 		public ModParser()
 		{
 			patterns = new Dictionary<string, Func<string, string, IItemMod>>
-			{
-				{@"^(?<value>\d+)% (?<name>.+)$", (name, value) => new PercentageIncreaseMod {Name = name, Value = value}},
-				{@"^\+(?<value>\d+) (?<name>.+)$", (name, value) => new AddedValueMod {Name = name, Value = value}},
-				{@"^\+(?<value>\d+)% (?<name>.+)$", (name, value) => new AddedPercentageMod {Name = name, Value = value}},
-			};
+				{
+					{@"^(?<value>\d+)% of Physical Attack Damage Leeched as (?<name>.+)$", (name, value) => new PercentageLeechedMod {Name = name, Value = value}},
+					{@"^(?<value>\d+)% (?<name>.+)$", (name, value) => new PercentageIncreaseMod {Name = name, Value = value}},
+					{@"^\+(?<value>\d+) (?<name>.+)$", (name, value) => new AddedValueMod {Name = name, Value = value}},
+					{@"^\+(?<value>\d+)% (?<name>.+)$", (name, value) => new AddedPercentageMod {Name = name, Value = value}},
+					{@"^Adds (?<value>\d+-\d+) (?<name>.+)$", (name, value) => new AddedDamageRangeMod {Name = name, Value = value}},
+					{@"^(?<value>\d+.\d+) (?<name>.+)$", (name, value) => new RegenerationMod {Name = name, Value = value}},
+				};
 		}
 
 		public IEnumerable<IItemMod> Parse(string text)
@@ -61,6 +64,43 @@ namespace Parsing
 		public string Name { get; set; }
 		public string Value { get; set; }
 	}
+
+	public class RegenerationMod : IItemMod
+	{
+		public string Name { get; set; }
+		public string Value { get; set; }
+	}
+
+	public class PercentageLeechedMod : IItemMod
+	{
+		private string name;
+		public string Name
+		{
+			get { return string.Format("of Physical Attack Damage Leeched as {0}", name); }
+			set { name = value; }
+		}
+
+		public string Value { get; set; }
+	}
+
+	public class AddedDamageRangeMod : IItemMod
+	{
+		public string Name { get; set; }
+
+		public string Value
+		{
+			get { return string.Format("{0}-{1}", MinValue, MaxValue); }
+			set
+			{
+				MinValue = Convert.ToInt32(value.Split('-').First());
+				MaxValue = Convert.ToInt32(value.Split('-').Last());
+			}
+		}
+
+		public int MinValue { get; private set; }
+		public int MaxValue { get; private set; }
+	}
+
 
 	public class UnknownMod : IItemMod
 	{
