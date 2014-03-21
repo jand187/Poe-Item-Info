@@ -1,0 +1,18 @@
+Rarity: Rare
+Phoenix Pelt
+Necromancer Silks
+--------
+Energy Shield: 125
+--------
+Requirements:
+Level: 59
+Int: 160
+--------
+Sockets: B B 
+--------
+Itemlevel: 61
+--------
+3.8 Life Regenerated per second
++36 to maximum Mana
++31% to Fire Resistance
++30% to Cold Resistance

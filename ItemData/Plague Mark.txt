@@ -1,0 +1,27 @@
+Rarity: Rare
+Plague Mark
+Angelic Kite Shield
+--------
+Quality: +20% (augmented)
+Chance to Block: 24%
+Armour: 171 (augmented)
+Energy Shield: 74 (augmented)
+--------
+Requirements:
+Level: 59 (gem)
+Str (gem): 94
+Dex (gem): 132
+Int (gem): 119
+--------
+Sockets: R-G-B 
+--------
+Itemlevel: 59
+--------
++24% to all Elemental Resistances
+--------
+32% increased Armour and Energy Shield
++55 to maximum Life
++15 to maximum Energy Shield
++21% to Cold Resistance
++15% to Chaos Resistance
+10% increased Block and Stun Recovery

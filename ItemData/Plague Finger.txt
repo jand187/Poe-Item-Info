@@ -1,0 +1,16 @@
+Rarity: Rare
+Plague Finger
+Diamond Ring
+--------
+Requirements:
+Level: 35
+--------
+Itemlevel: 47
+--------
+30% increased Global Critical Strike Chance
+--------
++32 to Strength
++15 to Dexterity
+Adds 9-15 Fire Damage
++58 to maximum Life
++12% to Cold Resistance

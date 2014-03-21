@@ -1,0 +1,21 @@
+Rarity Rare
+Eagle Spark
+Shagreen Boots
+--------
+Quality +20% (augmented)
+Evasion Rating 188 (augmented)
+--------
+Requirements
+Level 59 (gem)
+Str (gem) 59
+Dex 97
+Int (gem) 113
+--------
+Sockets B-R-R-G 
+--------
+Itemlevel 59
+--------
+5.3 Life Regenerated per second
+11% increased Rarity of Items found
++22% to Lightning Resistance
+20% increased Movement Speed

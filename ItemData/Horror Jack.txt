@@ -1,0 +1,19 @@
+Rarity: Rare
+Horror Jack
+Sun Plate
+--------
+Armour: 512 (augmented)
+--------
+Requirements:
+Level: 48
+Str: 124
+--------
+Sockets: R 
+--------
+Itemlevel: 61
+--------
+59% increased Armour
++82 to maximum Life
++10% to Fire Resistance
++37% to Cold Resistance
+24% increased Block and Stun Recovery

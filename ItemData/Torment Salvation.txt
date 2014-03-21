@@ -1,0 +1,22 @@
+Rarity: Rare
+Torment Salvation
+Chain Hauberk
+--------
+Quality: +20% (augmented)
+Armour: 389 (augmented)
+Energy Shield: 187 (augmented)
+--------
+Requirements:
+Level: 59 (gem)
+Str (gem): 76
+Dex (gem): 93
+Int (gem): 125
+--------
+Sockets: R G-G-B-B-B 
+--------
+Itemlevel: 51
+--------
+62% increased Armour and Energy Shield
+2 Life Regenerated per second
++48 to maximum Mana
++37 to maximum Energy Shield

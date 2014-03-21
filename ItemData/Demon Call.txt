@@ -1,0 +1,25 @@
+Rarity: Rare
+Demon Call
+Omen Wand
+--------
+Wand
+Physical Damage: 25-47
+Elemental Damage: 7-79 (augmented)
+Critical Strike Chance: 11.52% (augmented)
+Attacks per Second: 1.10
+--------
+Requirements:
+Level: 58 (gem)
+Int: 200
+--------
+Sockets: B-B 
+--------
+Itemlevel: 63
+--------
+16% increased Spell Damage
+--------
+25% increased Spell Damage
+13% increased Fire Damage
+Adds 7-79 Lightning Damage
+34% increased Critical Strike Chance
++20 to maximum Mana

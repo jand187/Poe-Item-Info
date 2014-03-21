@@ -1,0 +1,18 @@
+Rarity: Rare
+Glyph Stride
+Goliath Greaves
+--------
+Armour: 154
+--------
+Requirements:
+Level: 54
+Str: 95
+--------
+Sockets: R R 
+--------
+Itemlevel: 60
+--------
++68 to maximum Life
+16% increased Rarity of Items found
+30% increased Movement Speed
+19% increased Block and Stun Recovery

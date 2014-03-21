@@ -1,0 +1,15 @@
+Rarity: Rare
+Dragon Twirl
+Diamond Ring
+--------
+Requirements:
+Level: 44
+--------
+Itemlevel: 68
+--------
+30% increased Global Critical Strike Chance
+--------
++37 to Dexterity
++56 to maximum Life
++22% to Fire Resistance
+1% of Physical Attack Damage Leeched as Life

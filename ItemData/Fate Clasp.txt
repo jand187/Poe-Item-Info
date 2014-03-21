@@ -1,0 +1,16 @@
+Rarity: Rare
+Fate Clasp
+Rustic Sash
+--------
+Requirements:
+Level: 46
+--------
+Itemlevel: 66
+--------
+23% increased Physical Damage
+--------
+21% increased Elemental Damage with Weapons
++43 to Armour
++22 to maximum Energy Shield
++11% to Lightning Resistance
+32% increased Stun Duration on enemies
