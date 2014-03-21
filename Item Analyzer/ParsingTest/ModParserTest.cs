@@ -46,6 +46,36 @@ namespace ParsingTest
 		}
 
 		[Fact]
+		public void Can_Parse_AddedDamageRangeMod()
+		{
+			const string text = "Adds 9-15 Fire Damage";
+
+			var result = new ModParser().ParseLine(text);
+
+			Assert.False(true);
+		}
+
+		[Fact]
+		public void Can_Parse_RegenerationMod()
+		{
+			const string text = "3.8 Life Regenerated per second";
+
+			var result = new ModParser().ParseLine(text);
+
+			Assert.False(true);
+		}
+
+		[Fact]
+		public void Can_Parse_PercentageLeechedMod()
+		{
+			const string text = "1% of Physical Attack Damage Leeched as Life";
+
+			var result = new ModParser().ParseLine(text);
+
+			Assert.False(true);
+		}
+
+		[Fact]
 		public void Parse_Differentiates_Between_Mod_Types()
 		{
 			var builder = new StringBuilder();
