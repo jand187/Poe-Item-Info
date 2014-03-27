@@ -5,11 +5,11 @@ using System.Text.RegularExpressions;
 
 namespace Parsing
 {
-	public class ModParser
+	public class ItemParser
 	{
 		private readonly Dictionary<string, Func<string, string, IItemMod>> patterns;
 
-		public ModParser()
+		public ItemParser()
 		{
 			patterns = new Dictionary<string, Func<string, string, IItemMod>>
 				{

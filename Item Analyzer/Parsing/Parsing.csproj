@@ -43,7 +43,7 @@
     <Compile Include="AddedPercentageMod.cs" />
     <Compile Include="AddedValueMod.cs" />
     <Compile Include="IItemMod.cs" />
-    <Compile Include="ModParser.cs" />
+    <Compile Include="ItemParser.cs" />
     <Compile Include="PercentageIncreaseMod.cs" />
     <Compile Include="PercentageLeechedMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

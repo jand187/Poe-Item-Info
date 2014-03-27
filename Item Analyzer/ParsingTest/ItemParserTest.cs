@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
 using FluentAssertions;
 using Parsing;
@@ -7,14 +6,14 @@ using Xunit;
 
 namespace ParsingTest
 {
-	public class ModParserTest
+	public class ItemParserTest
 	{
 		[Fact]
 		public void Can_Parse_PercentageIncreaseMod()
 		{
 			const string text = "21% increased Elemental Damage with Weapons";
 
-			var result = new ModParser().ParseLine(text) as PercentageIncreaseMod;
+			var result = new ItemParser().ParseLine(text) as PercentageIncreaseMod;
 
 			result.Should().NotBeNull();
 			result.Name.Should().Be("increased Elemental Damage with Weapons");
@@ -26,7 +25,7 @@ namespace ParsingTest
 		{
 			const string text = "+43 to Armour";
 
-			var result = new ModParser().ParseLine(text) as AddedValueMod;
+			var result = new ItemParser().ParseLine(text) as AddedValueMod;
 
 			result.Should().NotBeNull();
 			result.Name.Should().Be("to Armour");
@@ -38,7 +37,7 @@ namespace ParsingTest
 		{
 			const string text = "+11% to Lightning Resistance";
 
-			var result = new ModParser().ParseLine(text) as AddedPercentageMod;
+			var result = new ItemParser().ParseLine(text) as AddedPercentageMod;
 
 			result.Should().NotBeNull();
 			result.Name.Should().Be("to Lightning Resistance");
@@ -50,8 +49,8 @@ namespace ParsingTest
 		{
 			const string text = "Adds 9-15 Fire Damage";
 
-			var result = new ModParser().ParseLine(text) as AddedDamageRangeMod;
-		
+			var result = new ItemParser().ParseLine(text) as AddedDamageRangeMod;
+
 			result.Should().NotBeNull();
 			result.Name.Should().Be("Fire Damage");
 			result.Value.Should().Be("9-15");
@@ -64,7 +63,7 @@ namespace ParsingTest
 		{
 			const string text = "3.8 Life Regenerated per second";
 
-			var result = new ModParser().ParseLine(text) as RegenerationMod;
+			var result = new ItemParser().ParseLine(text) as RegenerationMod;
 
 			result.Should().NotBeNull();
 			result.Name.Should().Be("Life Regenerated per second");
@@ -76,8 +75,8 @@ namespace ParsingTest
 		{
 			const string text = "1% of Physical Attack Damage Leeched as Life";
 
-			var result = new ModParser().ParseLine(text) as PercentageLeechedMod;
-			
+			var result = new ItemParser().ParseLine(text) as PercentageLeechedMod;
+
 			result.Should().NotBeNull();
 			result.Name.Should().Be("of Physical Attack Damage Leeched as Life");
 			result.Value.Should().Be("1");
@@ -94,15 +93,14 @@ namespace ParsingTest
 			builder.AppendLine("+43 to Armour");
 			builder.AppendLine("21% increased Elemental Damage with Weapons");
 
-			var result = new ModParser().Parse(builder.ToString()).ToList();
+			var result = new ItemParser().Parse(builder.ToString()).ToList();
 
-			result[0].GetType().Should().Be(typeof(AddedValueMod));
-			result[1].GetType().Should().Be(typeof(AddedPercentageMod));
-			result[2].GetType().Should().Be(typeof(PercentageIncreaseMod));
-			result[3].GetType().Should().Be(typeof(AddedPercentageMod));
-			result[4].GetType().Should().Be(typeof(AddedValueMod));
-			result[5].GetType().Should().Be(typeof(PercentageIncreaseMod));
+			result[0].GetType().Should().Be(typeof (AddedValueMod));
+			result[1].GetType().Should().Be(typeof (AddedPercentageMod));
+			result[2].GetType().Should().Be(typeof (PercentageIncreaseMod));
+			result[3].GetType().Should().Be(typeof (AddedPercentageMod));
+			result[4].GetType().Should().Be(typeof (AddedValueMod));
+			result[5].GetType().Should().Be(typeof (PercentageIncreaseMod));
 		}
-
 	}
 }
