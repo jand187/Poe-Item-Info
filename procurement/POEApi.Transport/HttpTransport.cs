@@ -77,7 +77,6 @@ namespace POEApi.Transport
 
 			var response = (HttpWebResponse) request.GetResponse();
 
-			//If we didn't get a redirect, your gonna have a bad time.
 			if (response.StatusCode != HttpStatusCode.Found)
 				throw new LogonFailedException(this.email);
 
