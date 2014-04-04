@@ -47,13 +47,11 @@
     <Compile Include="CurrencyHandler.cs" />
     <Compile Include="CurrencyRatio.cs" />
     <Compile Include="EquipedItems.cs" />
-    <Compile Include="Events\AuthenticateEventArgs.cs" />
     <Compile Include="Gear.cs" />
     <Compile Include="GearType\GearType.cs" />
     <Compile Include="GearType\GearTypeFactory.cs" />
     <Compile Include="GearType\GearTypeRunner.cs" />
     <Compile Include="Gem.cs" />
-    <Compile Include="Events\ImageLoadedEventArgs.cs" />
     <Compile Include="GemCategory.cs" />
     <Compile Include="ImageComparer.cs" />
     <Compile Include="Item.cs" />
@@ -61,8 +59,6 @@
     <Compile Include="JSONProxy\Stash.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="OrbType.cs" />
-    <Compile Include="Events\POEEventArgs.cs" />
-    <Compile Include="Events\POEEventState.cs" />
     <Compile Include="POEModel.cs" />
     <Compile Include="Property.cs" />
     <Compile Include="ProxyMapper.cs" />
@@ -72,7 +68,6 @@
     <Compile Include="StackInfo.cs" />
     <Compile Include="Stash.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Events\StashLoadedEventArgs.cs" />
     <Compile Include="Tab.cs" />
   </ItemGroup>
   <ItemGroup>
