@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Security;
 using POEApi.Model;
 
@@ -13,8 +14,11 @@ namespace ConsoleApplication1
 			var password = new SecureString();
 			"prutprutlugt".ToCharArray().ToList().ForEach(password.AppendChar);
 			model.Authenticate("kimolsen@gmail.com", password, false, false);
-			var chars = model.GetCharacters();
-			var stash = model.GetStash(0, chars.First().League, false);
+			
+			var stash = model.GetStash(0, "Standard", false);
+
+			Console.WriteLine(stash.Get<Item>().First().TypeLine);
+			Console.ReadKey();
 		}
 	}
 }

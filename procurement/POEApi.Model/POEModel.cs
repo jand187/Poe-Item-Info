@@ -37,32 +37,12 @@ namespace POEApi.Model
 
 		public event ImageLoadEventHandler ImageLoading;
 
-		public event ThottledEventHandler Throttled;
-
-		public bool Authenticate(string email, SecureString password, bool offline, bool useSessionID)
+		public bool Authenticate(string email, SecureString password, bool offline, bool useSessionId)
 		{
-			transport = new HttpTransport(email); //new CachedTransport(email, new HttpTransport(email));
-			cacheService = new CacheService(email);
-
-			transport.Throttled += instance_Throttled;
-			onAuthenticate(POEEventState.BeforeEvent, email);
-
-			transport.Authenticate(email, password, useSessionID);
-
-			onAuthenticate(POEEventState.AfterEvent, email);
+			transport = new HttpTransport(email); 
+			transport.Authenticate(email, password, useSessionId);
 
 			return true;
-		}
-
-		private void instance_Throttled(object sender, ThottledEventArgs e)
-		{
-			if (Throttled != null)
-				Throttled(sender, e);
-		}
-
-		public void ForceRefresh()
-		{
-			cacheService.Clear();
 		}
 
 		public Stash GetStash(int index, string league, bool forceRefresh)
@@ -70,7 +50,7 @@ namespace POEApi.Model
 			var serialiser = new DataContractJsonSerializer(typeof (JSONProxy.Stash));
 			JSONProxy.Stash proxy = null;
 
-			onStashLoaded(POEEventState.BeforeEvent, index, -1);
+			//onStashLoaded(POEEventState.BeforeEvent, index, -1);
 
 			using (var stream = transport.GetStash(index, league, forceRefresh))
 			{
@@ -87,7 +67,7 @@ namespace POEApi.Model
 				}
 			}
 
-			onStashLoaded(POEEventState.AfterEvent, index, proxy.NumTabs);
+			//onStashLoaded(POEEventState.AfterEvent, index, proxy.NumTabs);
 
 			return new Stash(proxy);
 		}
