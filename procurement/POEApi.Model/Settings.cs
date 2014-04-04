@@ -32,8 +32,6 @@ namespace POEApi.Model
                 Lists = originalDoc.Element("Lists").Elements("List").ToDictionary(list => list.Attribute("name").Value, list => list.Elements("Item").Select(e => e.Attribute("value").Value).ToList());
 
 
-            try
-            {
                 Buyouts = new Dictionary<int, string>();
                 if (originalDoc.Element("Buyouts") != null)
                     Buyouts = originalDoc.Element("Buyouts").Elements("Item").ToDictionary(list => (int)list.Attribute("id"), list => list.Attribute("value").Value);
@@ -41,14 +39,8 @@ namespace POEApi.Model
                 TabsBuyouts = new Dictionary<string, string>();
                 if (originalDoc.Element("TabBuyouts") != null)
                     TabsBuyouts = originalDoc.Element("TabBuyouts").Elements("Item").ToDictionary(list => list.Attribute("id").Value, list => list.Attribute("value").Value);
-            }
-            catch (Exception ex)
-            {
-                Logger.Log("Error loading Buyouts: " + ex.ToString());
-                throw ex;
-            }
-
-            PopularGems = new List<string>();
+		
+			PopularGems = new List<string>();
             if (originalDoc.Element("PopularGems") != null)
                 PopularGems = originalDoc.Element("PopularGems").Elements("Gem").Select(e => e.Attribute("name").Value).ToList();
         }
@@ -91,14 +83,7 @@ namespace POEApi.Model
                 originalDoc.Element("Buyouts").Add(buyout);
             }
 
-            try
-            {
                 originalDoc.Save(location);
-            }
-            catch (Exception ex)
-            {
-                Logger.Log("Couldn't save settings: " + ex.ToString());
-            }
         }
     }
 }

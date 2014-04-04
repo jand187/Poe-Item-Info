@@ -65,17 +65,7 @@ namespace POEApi.Model
 
         internal static OrbType GetOrbType(string name)
         {
-            try
-            {
                 return orbMap.First(m => name.Contains(m.Key)).Value;
-            }
-            catch (Exception ex)
-            {
-                Logger.Log(ex);
-                var message = "ProxyMapper.GetOrbType Failed! ItemType = " + name;
-                Logger.Log(message);
-                throw new Exception(message);
-            }
         }
 
         internal static List<Property> GetProperties(List<JSONProxy.Property> properties)

@@ -15,11 +15,6 @@ namespace POEApi.Transport
 		private readonly string email;
 		private readonly CookieContainer credentialCookies;
 
-		private readonly bool useProxy;
-		private readonly string proxyUser;
-		private readonly string proxyPassword;
-		private readonly string proxyDomain;
-
 		private enum HttpMethod
 		{
 			GET,
@@ -37,17 +32,8 @@ namespace POEApi.Transport
 		public HttpTransport(string login)
 		{
 			credentialCookies = new CookieContainer();
-			this.email = login;
+			email = login;
 			RequestThrottle.Instance.Throttled += instance_Throttled;
-		}
-
-		public HttpTransport(string login, string proxyUser, string proxyPassword, string proxyDomain)
-			: this(login)
-		{
-			this.proxyUser = proxyUser;
-			this.proxyPassword = proxyPassword;
-			this.proxyDomain = proxyDomain;
-			this.useProxy = true;
 		}
 
 		private void instance_Throttled(object sender, ThottledEventArgs e)
@@ -89,8 +75,7 @@ namespace POEApi.Transport
 			var postStream = request.GetRequestStream();
 			postStream.Write(byteData, 0, byteData.Length);
 
-			HttpWebResponse response;
-			response = (HttpWebResponse) request.GetResponse();
+			var response = (HttpWebResponse) request.GetResponse();
 
 			//If we didn't get a redirect, your gonna have a bad time.
 			if (response.StatusCode != HttpStatusCode.Found)
@@ -107,21 +92,9 @@ namespace POEApi.Transport
 			request.UserAgent =
 				"User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; InfoPath.3; .NET4.0C; .NET4.0E; .NET CLR 1.1.4322)";
 			request.Method = method.ToString();
-			if (useProxy)
-				request.Proxy = processProxySettings();
-
 			request.ContentType = "application/x-www-form-urlencoded";
 
 			return request;
-		}
-
-		public WebProxy processProxySettings()
-		{
-			var proxy = WebProxy.GetDefaultProxy();
-			var credentials = new NetworkCredential(proxyUser, proxyPassword, proxyDomain);
-			proxy.Credentials = credentials;
-
-			return proxy;
 		}
 
 		public Stream GetStash(int index, string league, bool refresh)
@@ -132,24 +105,12 @@ namespace POEApi.Transport
 			return getMemoryStreamFromResponse(response);
 		}
 
-		public Stream GetStash(int index, string league)
-		{
-			return GetStash(index, league, false);
-		}
-
 		public Stream GetCharacters()
 		{
 			var request = getHttpRequest(HttpMethod.GET, characterURL);
 			var response = (HttpWebResponse) request.GetResponse();
 
 			return getMemoryStreamFromResponse(response);
-		}
-
-		public Stream GetImage(string url)
-		{
-			var client = new WebClient();
-			client.Proxy = processProxySettings();
-			return new MemoryStream(client.DownloadData(url));
 		}
 
 		public Stream GetInventory(string characterName)

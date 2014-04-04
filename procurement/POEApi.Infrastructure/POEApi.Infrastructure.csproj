@@ -42,13 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CurrencyAbbreviationMap.cs" />
     <Compile Include="DPAPI.cs" />
     <Compile Include="Events\ThottledEventArgs.cs" />
     <Compile Include="Events\ThrottledEventHandler.cs" />
     <Compile Include="ExcessiveRequestException.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="Logger.cs" />
     <Compile Include="LogonFailedException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
