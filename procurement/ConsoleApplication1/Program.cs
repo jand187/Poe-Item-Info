@@ -12,9 +12,9 @@ namespace ConsoleApplication1
 
 			var password = new SecureString();
 			"prutprutlugt".ToCharArray().ToList().ForEach(password.AppendChar);
-			var authenticate = model.Authenticate("kimolsen@gmail.com", password, false, false);
+			model.Authenticate("kimolsen@gmail.com", password, false, false);
 			var chars = model.GetCharacters();
-			var stash = model.GetStash(chars.First().League);
+			var stash = model.GetStash(0, chars.First().League, false);
 		}
 	}
 }
