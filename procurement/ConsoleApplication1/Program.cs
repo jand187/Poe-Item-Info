@@ -12,8 +12,14 @@ namespace ConsoleApplication1
 			var password = "";
 			var email = "";
 
-			password = "";
-			email = "";
+			if (args.Length == 0)
+			{
+				Console.Write("Enter email: ");
+				email = Console.ReadLine();
+
+				Console.Write("Enter password: ");
+				password = Console.ReadLine();
+			}
 
 			var model = new POEModel();
 
