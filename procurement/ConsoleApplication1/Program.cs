@@ -9,13 +9,24 @@ namespace ConsoleApplication1
 	{
 		private static void Main(string[] args)
 		{
+			var password = "";
+			var email = "";
+
+			password = "";
+			email = "";
+
 			var model = new POEModel();
 
-			var password = new SecureString();
-			"prutprutlugt".ToCharArray().ToList().ForEach(password.AppendChar);
-			model.Authenticate("kimolsen@gmail.com", password, false, false);
+			var securePassword = new SecureString();
+			password.ToCharArray().ToList().ForEach(securePassword.AppendChar);
+			model.Authenticate(email, securePassword, false, false);
 			
 			var stash = model.GetStash(0, "Standard", false);
+
+			for (var index = 1; index < stash.NumberOfTabs; index++)
+			{
+				var stash2 = model.GetStash(index, "Standard", false);
+			}
 
 			Console.WriteLine(stash.Get<Item>().First().TypeLine);
 			Console.ReadKey();

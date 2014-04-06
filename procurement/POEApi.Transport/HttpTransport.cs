@@ -101,7 +101,23 @@ namespace POEApi.Transport
 			var request = getHttpRequest(HttpMethod.GET, string.Format(stashURL, league, index));
 			var response = (HttpWebResponse) request.GetResponse();
 
-			return getMemoryStreamFromResponse(response);
+			var stream = getMemoryStreamFromResponse(response);
+
+			var reader = new StreamReader(stream);
+
+			var contents = reader.ReadToEnd();
+
+			var dir = Directory.CreateDirectory(@".\data");
+			var filename = string.Format("tab{0}.json", index);
+			var fullFilename = Path.Combine(dir.FullName, filename);
+			using (var writer = File.CreateText(fullFilename))
+			{
+				writer.Write(contents);
+				Console.WriteLine(string.Format("Created: {0}", filename));
+			}
+
+			stream.Position = 0;
+			return stream;
 		}
 
 		public Stream GetCharacters()
