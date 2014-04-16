@@ -91,6 +91,9 @@ namespace Server
 
 		private void ExitOnClick(object sender, EventArgs eventArgs)
 		{
+			icon.ContextMenu.Dispose();
+			icon.Visible = false;
+			icon.Dispose();
 			Application.Exit();
 		}
 

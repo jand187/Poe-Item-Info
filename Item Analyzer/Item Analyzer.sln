@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B38F1A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{3BFBEEA2-5BDB-402A-8088-57E3B040A7F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationDummy", "WebApplicationDummy\WebApplicationDummy.csproj", "{A03C4FD6-6AD3-4D59-AB37-C31B0026487F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website", "Website\Website.csproj", "{97D40E77-DEB5-4CBC-867F-988B3FB21A1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,10 +48,10 @@ Global
 		{3BFBEEA2-5BDB-402A-8088-57E3B040A7F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BFBEEA2-5BDB-402A-8088-57E3B040A7F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BFBEEA2-5BDB-402A-8088-57E3B040A7F9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A03C4FD6-6AD3-4D59-AB37-C31B0026487F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A03C4FD6-6AD3-4D59-AB37-C31B0026487F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A03C4FD6-6AD3-4D59-AB37-C31B0026487F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A03C4FD6-6AD3-4D59-AB37-C31B0026487F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97D40E77-DEB5-4CBC-867F-988B3FB21A1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97D40E77-DEB5-4CBC-867F-988B3FB21A1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97D40E77-DEB5-4CBC-867F-988B3FB21A1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97D40E77-DEB5-4CBC-867F-988B3FB21A1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
