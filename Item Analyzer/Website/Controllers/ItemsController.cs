@@ -20,7 +20,10 @@ namespace Website.Controllers
 				ItemViewModel = stashTab.Items.Where(e => !string.IsNullOrWhiteSpace(e.Name)).Select(item => new ItemViewModel
 				{
 					Name = item.Name,
-					Affixes = item.ExplicitMods.Select(Affix.Parse)
+					Affixes = item.ExplicitMods.Select(Affix.Parse),
+					TypeLine = item.TypeLine,
+					Type = item.Properties != null ? item.Properties.First().Name : string.Empty,
+					Icon = item.Icon,
 				})
 			};
 

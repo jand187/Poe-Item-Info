@@ -12,5 +12,14 @@ namespace Website.JSonProxies
 	{
 		public string Name { get; set; }
 		public IEnumerable<string> ExplicitMods { get; set; }
+		public string TypeLine { get; set; }
+		public IEnumerable<ItemProperty> Properties { get; set; }
+		public string Icon { get; set; }
+	}
+
+	public class ItemProperty
+	{
+		public string Name { get; set; }
+//		public IEnumerable<object> Values { get; set; }
 	}
 }
