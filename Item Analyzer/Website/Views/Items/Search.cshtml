@@ -9,33 +9,50 @@
 <div class="pull-right">@Html.ActionLink("Next", "Index", new {page = Model.CurrentPage + 1})</div>
 <div>@Html.ActionLink("Prev", "Index", new {page = Model.CurrentPage - 1})</div>
 
-<select>
-    @foreach (var name in Model.AffixNames)
-    {
-        <option>@name</option>
-    }
-</select>
+@using (Html.BeginForm("Search", "Items", FormMethod.Get))
+{
+    @Html.DropDownListFor(m => m.SelectedAffix, new SelectList(Model.AffixNames))
+    <button>Search</button>
+}
+
 <table class="table items-table">
     <caption>Items: @Model.ItemViewModels.Count()</caption>
     <thead>
         <tr>
             <th colspan="2">Item</th>
-            <th >Affixes</th>
+            <th>Affixes</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.ItemViewModels)
         {
             <tr>
-                <td >
+                <td>
                     <img src="@item.Icon" />
                 </td>
-                <td >   
+                <td>
                     <h4>@item.Name</h4>
                     <div>@item.TypeLine</div>
-                    <div>@item.Type</div>
+                    <hr/>
+                    @*                    <div>@item.Type</div>*@
+                    
+                    @foreach (var prop in item.Properties)
+                    {
+                        <div>@prop.Key: @prop.Value</div>
+                    }
+                    <hr />
+
+                    <div>@item.TabName (@item.Location)</div>
                 </td>
-                <td >
+                <td>
+                    @foreach (var affix in item.ImplicitMods)
+                    {
+                        <div class="@affix.Style">@affix</div>
+                    }
+                    @if (item.ImplicitMods.Any())
+                    {
+                        <hr/>
+                    }
                     @foreach (var affix in item.Affixes)
                     {
                         <div class="@affix.Style">@affix</div>

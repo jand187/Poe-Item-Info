@@ -2,14 +2,14 @@ using System.Linq;
 
 namespace Website.Models
 {
-	public class PercentIncreaseAffix : Affix
+	public class GainedOnKillAffix : Affix
 	{
 		public override string Name { get; set; }
 		public override int Value { get; set; }
-		
+
 		public override string ToString()
 		{
-			return string.Format("{0}% {1} ({2})", Value, Name, this.GetType().Name);
+			return string.Format("+{0} {1} ({2})", Value, Name, this.GetType().Name);
 		}
 	}
 }

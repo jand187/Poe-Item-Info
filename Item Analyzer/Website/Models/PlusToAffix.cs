@@ -4,8 +4,8 @@ namespace Website.Models
 {
 	public class PlusToAffix : Affix
 	{
-		public string Name { get; set; }
-		public string Value { get; set; }
+		public override string Name { get; set; }
+		public override int Value { get; set; }
 
 		public override string ToString()
 		{
