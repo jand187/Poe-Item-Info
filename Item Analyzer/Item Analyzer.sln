@@ -3,7 +3,43 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoeItemInfo.Model", "PoeItemInfo.Model\PoeItemInfo.Model.csproj", "{5A1CEB0F-5122-4414-9359-3C3064E3194C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoeItemInfo.ModelTest", "PoeItemInfo.ModelTest\PoeItemInfo.ModelTest.csproj", "{C961985C-BA85-4B19-B6C9-335282179B52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoeItemInfo.Data.Model", "PoeItemInfo.Data.Model\PoeItemInfo.Data.Model.csproj", "{E2EDC17F-52FC-4963-BEEF-B48B230D7C33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoeItemInfo.Data.ModelTest", "PoeItemInfo.Data.ModelTest\PoeItemInfo.Data.ModelTest.csproj", "{D42B0842-D327-40E8-BF7A-41CA587FAD88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCommon", "TestCommon\TestCommon.csproj", "{2BB89D9E-543E-443A-8957-61A6FEE36BD5}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5A1CEB0F-5122-4414-9359-3C3064E3194C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A1CEB0F-5122-4414-9359-3C3064E3194C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A1CEB0F-5122-4414-9359-3C3064E3194C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A1CEB0F-5122-4414-9359-3C3064E3194C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C961985C-BA85-4B19-B6C9-335282179B52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C961985C-BA85-4B19-B6C9-335282179B52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C961985C-BA85-4B19-B6C9-335282179B52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C961985C-BA85-4B19-B6C9-335282179B52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2EDC17F-52FC-4963-BEEF-B48B230D7C33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2EDC17F-52FC-4963-BEEF-B48B230D7C33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2EDC17F-52FC-4963-BEEF-B48B230D7C33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2EDC17F-52FC-4963-BEEF-B48B230D7C33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D42B0842-D327-40E8-BF7A-41CA587FAD88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D42B0842-D327-40E8-BF7A-41CA587FAD88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D42B0842-D327-40E8-BF7A-41CA587FAD88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D42B0842-D327-40E8-BF7A-41CA587FAD88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BB89D9E-543E-443A-8957-61A6FEE36BD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BB89D9E-543E-443A-8957-61A6FEE36BD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BB89D9E-543E-443A-8957-61A6FEE36BD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BB89D9E-543E-443A-8957-61A6FEE36BD5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
