@@ -24,6 +24,6 @@ namespace PoeItemInfo.Data.Model.JSonProxy
 		public int x { get; set; }
 		public int y { get; set; }
 		public string inventoryId { get; set; }
-		public IEnumerable<object> socketedItems { get; set; }
+		public IEnumerable<Item> socketedItems { get; set; }
 	}
 }
