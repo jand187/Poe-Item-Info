@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Text.RegularExpressions;
+﻿using System.Linq;
 
 namespace PoeItemInfo.Model
 {
@@ -31,25 +29,18 @@ namespace PoeItemInfo.Model
 				TypeLine = item.typeLine,
 				Identified = item.identified,
 				Corrupted = item.corrupted,
-				Quality = GetQuality(item),
 				Properties = propertyParser.Parse(item.properties),
 				Requirements = requirementParser.Parse(item.requirements),
 				ExplicitMods = modsParser.Parse((item.explicitMods)),
 				ImplicitMods = modsParser.Parse((item.implicitMods)),
+				Location = new ItemLocation
+				{
+					InventoryId = item.inventoryId,
+					X = item.x,
+					Y = item.y,
+				},
+				SocketedItems = item.socketedItems != null ? item.socketedItems.Select(Parse) : new Item[0],
 			};
-		}
-
-		private int GetQuality(Data.Model.JSonProxy.Item item)
-		{
-			const string propertyName = "Quality";
-			if (!item.properties.Any())
-				return 0;
-
-			if (item.properties.All(p => p.name != propertyName))
-				return 0;
-
-			var valueSet = item.properties.First(p => p.name == propertyName).values.First().ToString();
-			return Convert.ToInt32(Regex.Match(valueSet, @"\d+").Value);
 		}
 	}
 }

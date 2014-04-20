@@ -84,18 +84,6 @@ namespace PoeItemInfo.ModelTest
 		}
 
 		[Fact]
-		public void ShouldParseQuality()
-		{
-			var original = new GenericBuilder<Item>()
-				.Item()
-				.Quality(17)
-				.Build();
-
-			var parsedItem = itemParser.Parse(original);
-			parsedItem.Quality.Should().Be(17);
-		}
-
-		[Fact]
 		public void ShouldParseProperties()
 		{
 			var original = new GenericBuilder<Item>()
@@ -126,14 +114,13 @@ namespace PoeItemInfo.ModelTest
 		{
 			var original = new GenericBuilder<Item>()
 				.Item()
-				.With(item => item.explicitMods = new string [0])
+				.With(item => item.explicitMods = new string[0])
 				.Build();
 
 			var parsedItem = itemParser.Parse(original);
 			modsParserMock.Received().Parse(original.explicitMods);
 			parsedItem.ExplicitMods.Should().NotBeNull();
 		}
-
 
 		[Fact]
 		public void ShouldParseImplicitMods()
@@ -146,6 +133,39 @@ namespace PoeItemInfo.ModelTest
 			var parsedItem = itemParser.Parse(original);
 			modsParserMock.Received().Parse(original.implicitMods);
 			parsedItem.ImplicitMods.Should().NotBeNull();
+		}
+
+		[Fact]
+		public void ShouldParseLocation()
+		{
+			var original = new GenericBuilder<Item>()
+				.Item()
+				.With(item => item.x = 3)
+				.With(item => item.y = 5)
+				.With(item => item.inventoryId = "Stash51")
+				.Build();
+
+			var parsedItem = itemParser.Parse(original);
+			parsedItem.Location.Should().NotBeNull();
+		}
+
+		[Fact]
+		public void ShouldParseSocketedItems()
+		{
+			var name = "some item";
+			var original = new GenericBuilder<Item>()
+				.Item()
+				.With(item => item.socketedItems = new[]
+				{
+					new Item
+					{
+						name = name
+					}
+				})
+				.Build();
+
+			var parsedItem = itemParser.Parse(original);
+			parsedItem.SocketedItems.First().Name.Should().Be(name);
 		}
 	}
 }

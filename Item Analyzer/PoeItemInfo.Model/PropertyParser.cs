@@ -13,7 +13,7 @@ namespace PoeItemInfo.Model
 	{
 		public IEnumerable<ItemProperty> Parse(IEnumerable<Property> properties)
 		{
-			return null;
+			return new ItemProperty[0];
 		}
 	}
 }

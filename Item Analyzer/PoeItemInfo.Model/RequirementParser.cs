@@ -13,7 +13,7 @@ namespace PoeItemInfo.Model
 	{
 		public IEnumerable<ItemRequirement> Parse(IEnumerable<Requirement> properties)
 		{
-			return null;
+			return new ItemRequirement[0];
 		}
 	}
 }

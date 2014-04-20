@@ -12,7 +12,7 @@ namespace PoeItemInfo.Model
 	{
 		public IEnumerable<ItemMod> Parse(IEnumerable<string> mods)
 		{
-			return null;
+			return new ItemMod[0];
 		}
 	}
 }

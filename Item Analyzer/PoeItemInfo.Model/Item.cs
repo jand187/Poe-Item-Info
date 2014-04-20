@@ -16,6 +16,8 @@ namespace PoeItemInfo.Model
 		public IEnumerable<ItemRequirement> Requirements { get; set; }
 		public IEnumerable<ItemMod> ExplicitMods { get; set; }
 		public IEnumerable<ItemMod> ImplicitMods { get; set; }
+		public ItemLocation Location { get; set; }
+		public IEnumerable<Item> SocketedItems { get; set; }
 	}
 
 	public class ItemProperty
@@ -33,5 +35,12 @@ namespace PoeItemInfo.Model
 	public class ItemMod
 	{
 		public string Name { get; set; }
+	}
+
+	public class ItemLocation
+	{
+		public string InventoryId { get; set; }
+		public int X { get; set; }
+		public int Y { get; set; }
 	}
 }
