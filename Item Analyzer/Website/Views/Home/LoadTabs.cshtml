@@ -1,0 +1,92 @@
+﻿@using System.Linq
+@model dynamic
+
+@{
+	ViewBag.Title = "Load tabs";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="section">
+	<form class="form-inline">
+		@Html.Label("email", "Email")
+		@Html.TextBox("email", "", new { @class = "form-control" })
+
+		@Html.Label("password", "Password")
+		@Html.TextBox("password", "", new { @class = "form-control" })
+		<button class="form-control btn-primary" id="LoadTabs">Load tabs</button>
+	</form>
+</div>
+
+<div class="section">
+	<form class="form-inline">
+		<button class="form-control btn-primary" id="loadAll">Load tabs</button>
+	</form>
+</div>
+
+<div id="tabs" class="section">
+	<div>test tab</div>
+</div>
+
+@section scripts{
+    
+	<script>
+		var tabList;
+		$(function() {
+			$("button#LoadTabs").click(function() {
+				event.preventDefault();
+				//tabList = { "Success": true, "Tabs": [{ "Index": 0, "Name": "1" }, { "Index": 1, "Name": "4" }, { "Index": 2, "Name": "Offload 1" }, { "Index": 3, "Name": "Lvl 70+" }, { "Index": 4, "Name": "Lvl 74+" }, { "Index": 5, "Name": "Flasks" }, { "Index": 6, "Name": "Flasks" }, { "Index": 7, "Name": "3" }, { "Index": 8, "Name": "qual" }, { "Index": 9, "Name": "Recipes" }, { "Index": 10, "Name": "Temp swap" }, { "Index": 11, "Name": "Good stuff" }, { "Index": 12, "Name": "Good stuff2" }, { "Index": 13, "Name": "Red gems" }, { "Index": 14, "Name": "Red gems support" }, { "Index": 15, "Name": "Green gems" }, { "Index": 16, "Name": "Green gems support" }, { "Index": 17, "Name": "Blue gems" }, { "Index": 18, "Name": "Blue gems support" }, { "Index": 19, "Name": "Gems " }, { "Index": 20, "Name": "Curses" }, { "Index": 21, "Name": "Gems qual" }, { "Index": 22, "Name": "Auras" }, { "Index": 23, "Name": "Totems" }, { "Index": 24, "Name": "Traps" }, { "Index": 25, "Name": "Ranged" }, { "Index": 26, "Name": "Rings dmg" }, { "Index": 27, "Name": "Rings resists" }, { "Index": 28, "Name": "Rings stats" }, { "Index": 29, "Name": "Rings leech" }, { "Index": 30, "Name": "Rings nomagic" }, { "Index": 31, "Name": "Magic Find" }, { "Index": 32, "Name": "Twink" }, { "Index": 33, "Name": "2" }, { "Index": 34, "Name": "Lvl <11" }, { "Index": 35, "Name": "Lvl <11" }, { "Index": 36, "Name": "Unique armor" }, { "Index": 37, "Name": "Unique Armor 2" }, { "Index": 38, "Name": "Unique weapons" }, { "Index": 39, "Name": "Unique weapons 2" }, { "Index": 40, "Name": "Market" }, { "Index": 41, "Name": "Belts" }, { "Index": 42, "Name": "Belts 2" }, { "Index": 43, "Name": "Quivers" }, { "Index": 44, "Name": "Quivers 2" }, { "Index": 45, "Name": "Shields" }, { "Index": 46, "Name": "Shields 2" }, { "Index": 47, "Name": "Shields 3" }, { "Index": 48, "Name": "Head" }, { "Index": 49, "Name": "4L Head" }, { "Index": 50, "Name": "4L Head mix" }, { "Index": 51, "Name": "Boots" }, { "Index": 52, "Name": "4L Boots" }, { "Index": 53, "Name": "4L Boots mix" }, { "Index": 54, "Name": "Gloves" }, { "Index": 55, "Name": "4L Gloves" }, { "Index": 56, "Name": "4L Gloves mix" }, { "Index": 57, "Name": "3 Link weapons" }, { "Index": 58, "Name": "3 Link weapons" }, { "Index": 59, "Name": "+ to gems in sock" }, { "Index": 60, "Name": "4 Link weapons" }, { "Index": 61, "Name": "Bows" }, { "Index": 62, "Name": "4L bows" }, { "Index": 63, "Name": "Chest amour 1" }, { "Index": 64, "Name": "Chest armor 2" }, { "Index": 65, "Name": "Chest armor 3" }, { "Index": 66, "Name": "Chest str" }, { "Index": 67, "Name": "Chest str/int" }, { "Index": 68, "Name": "Chest int" }, { "Index": 69, "Name": "Chest int/dex" }, { "Index": 70, "Name": "Chest dex" }, { "Index": 71, "Name": "Chest dex/str" }, { "Index": 72, "Name": "5 Link chest" }, { "Index": 73, "Name": "6 Sockets" }, { "Index": 74, "Name": "Market High rolls" }, { "Index": 75, "Name": "High Rolls" }, { "Index": 76, "Name": "High resist" }, { "Index": 77, "Name": "Elem dmg" }, { "Index": 78, "Name": "Phys dmg" }, { "Index": 79, "Name": "Phys dmg2" }, { "Index": 80, "Name": "Phys dmg3" }, { "Index": 81, "Name": "Spell booster" }, { "Index": 82, "Name": "Maps" }, { "Index": 83, "Name": "Chaos Resist" }, { "Index": 84, "Name": "Kenneths" }, { "Index": 85, "Name": "Kenneths qual " }, { "Index": 86, "Name": "Kenneths currency" }, { "Index": 87, "Name": "Kenneths gear" }] };
+				//updateTable(tabList);
+
+				$.ajax({
+				    url: "/api/tablist?" + $("form").serialize(),
+				}).done(function(data) {
+				    console.log(data);
+				    updateTable(data);
+				});
+
+			});
+		});
+
+		function updateTable(tabList) {
+			var container = $("div#tabs");
+			container.empty();
+			container.loadTemplate($("#tab-info-form-template"), tabList.Tabs);
+
+			container.find("button.loadTab").click(function(e) {
+				event.preventDefault();
+				var button = $(e.currentTarget);
+				var index = button.val();
+
+				$.ajax({
+					url: "/api/stash?" + $("form").serialize() + "&stashTab=" + index,
+				}).done(function(tabData) {
+					console.log(tabData);
+					var form = $(button.parents("form.tab-info")[0]);
+					form.empty();
+					form.loadTemplate($("#tab-info-template"), tabData);
+				});
+			});
+
+		};
+	</script>
+    
+    
+	<script type="text/html" id="tab-info-form-template">
+		<form class="form-inline tab-info">
+			<div class="tab-info-div">
+				<button class="form-control btn-primary pull-right loadTab" data-value="Index">Load</button>
+				<div><span data-content="Name" class="h4"></span></div>
+				<div class="x-small">Index:<span data-content="Index"></span> Loaded:<span data-content="Loaded"></span></div>
+			</div>
+		</form>
+	</script>
+	
+	<script type="text/html" id="tab-info-template">
+		<div class="tab-info-div">
+			<button class="form-control btn-primary pull-right loadTab" data-value="Index">Load</button>
+			<div><span data-content="Name" class="h4"></span></div>
+			<div class="x-small">Index:<span data-content="Index"></span> Loaded:<span data-content="Loaded"></span></div>
+		</div>
+	</script>
+}

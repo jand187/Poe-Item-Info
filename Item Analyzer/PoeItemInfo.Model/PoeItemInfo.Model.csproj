@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Item.cs" />
     <Compile Include="ItemParser.cs" />
+    <Compile Include="ItemTab.cs" />
     <Compile Include="ModsParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyParser.cs" />

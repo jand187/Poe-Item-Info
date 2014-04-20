@@ -1,7 +1,5 @@
 ﻿using System.Linq;
-using System.Security;
 using System.Web.Mvc;
-using PoeItemInfo.Transport;
 
 namespace Website.Controllers
 {
@@ -9,24 +7,31 @@ namespace Website.Controllers
 	{
 		public ActionResult Index(string email, string password)
 		{
-			if (string.IsNullOrWhiteSpace( email ))
-				return null;
-			
-			var securePassword = new SecureString();
-			password.ToCharArray().ToList().ForEach(securePassword.AppendChar);
+			//if (string.IsNullOrWhiteSpace( email ))
+			//	return null;
 
-			var transport = new HttpTransport();
+			//var securePassword = new SecureString();
+			//password.ToCharArray().ToList().ForEach(securePassword.AppendChar);
 
-			transport.Authenticate(email, securePassword, false);
+			//var transport = new HttpTransport();
+
+			//transport.Authenticate(email, securePassword, false);
 
 
-			//Stream stream = transport.GetStash(1, "Standard", false);
-			var json = transport.GetStashJson(1, "Standard");
+			////Stream stream = transport.GetStash(1, "Standard", false);
+			//var json = transport.GetStashJson(1, "Standard");
 
-			return new ContentResult
-			{
-				Content = json
-			};
+			//return new ContentResult
+			//{
+			//	Content = json
+			//};
+
+			return View();
+		}
+
+		public ActionResult LoadTabs(string email, string password)
+		{
+			return View();
 		}
 	}
 }
