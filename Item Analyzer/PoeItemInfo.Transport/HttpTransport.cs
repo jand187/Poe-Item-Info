@@ -8,9 +8,14 @@ using System.Text.RegularExpressions;
 
 namespace PoeItemInfo.Transport
 {
-	public class HttpTransport 
+	public interface IHttpTransport
 	{
-		private readonly string email;
+		bool Authenticate(string email, SecureString securePassword, bool useSessionId);
+		string GetStashJson(int index, string league);
+	}
+
+	public class HttpTransport : IHttpTransport
+	{
 		private readonly CookieContainer credentialCookies;
 
 		private enum HttpMethod
@@ -27,38 +32,26 @@ namespace PoeItemInfo.Transport
 
 		public event ThottledEventHandler Throttled;
 
-		public HttpTransport(string login)
+		public HttpTransport()
 		{
 			credentialCookies = new CookieContainer();
-			email = login;
-			RequestThrottle.Instance.Throttled += instance_Throttled;
+			RequestThrottle.Instance.Throttled += InstanceThrottled;
 		}
 
-		private void instance_Throttled(object sender, ThottledEventArgs e)
+		private void InstanceThrottled(object sender, ThottledEventArgs e)
 		{
 			if (Throttled != null)
 				Throttled(this, e);
 		}
 
-		public bool Authenticate(string email, SecureString password, bool useSessionID)
+		public bool Authenticate(string email, SecureString password, bool useSessionId)
 		{
-			//if (useSessionID)
-			//{
-			//	credentialCookies.Add(new Cookie("PHPSESSID", password.UnWrap(), "/", "www.pathofexile.com"));
-			//	var confirmAuth = getHttpRequest(HttpMethod.GET, loginURL);
-			//	var confirmAuthResponse = (HttpWebResponse) confirmAuth.GetResponse();
-
-			//	if (confirmAuthResponse.ResponseUri.ToString() == loginURL)
-			//		throw new LogonFailedException();
-			//	return true;
-			//}
-
-			var getHash = getHttpRequest(HttpMethod.GET, loginURL);
+			var getHash = GetHttpRequest(HttpMethod.GET, loginURL);
 			var hashResponse = (HttpWebResponse) getHash.GetResponse();
-			var loginResponse = Encoding.Default.GetString(getMemoryStreamFromResponse(hashResponse).ToArray());
+			var loginResponse = Encoding.Default.GetString(GetMemoryStreamFromResponse(hashResponse).ToArray());
 			var hashValue = Regex.Match(loginResponse, hashRegEx).Groups["hash"].Value;
 
-			var request = getHttpRequest(HttpMethod.POST, loginURL);
+			var request = GetHttpRequest(HttpMethod.POST, loginURL);
 			request.AllowAutoRedirect = false;
 
 			var data = new StringBuilder();
@@ -81,7 +74,7 @@ namespace PoeItemInfo.Transport
 			return true;
 		}
 
-		private HttpWebRequest getHttpRequest(HttpMethod method, string url)
+		private HttpWebRequest GetHttpRequest(HttpMethod method, string url)
 		{
 			var request = (HttpWebRequest) RequestThrottle.Instance.Create(url);
 
@@ -96,7 +89,7 @@ namespace PoeItemInfo.Transport
 
 		public string GetStashJson(int index, string league)
 		{
-			var request = getHttpRequest(HttpMethod.GET, string.Format(stashURL, league, index));
+			var request = GetHttpRequest(HttpMethod.GET, string.Format(stashURL, league, index));
 			var response = (HttpWebResponse)request.GetResponse();
 			using (var reader = new StreamReader(response.GetResponseStream()))
 			{
@@ -105,47 +98,47 @@ namespace PoeItemInfo.Transport
 		}
 
 
-		public Stream GetStash(int index, string league, bool refresh)
-		{
-			var request = getHttpRequest(HttpMethod.POST, string.Format(stashURL, league, index));
-			var response = (HttpWebResponse) request.GetResponse();
+		//public Stream GetStash(int index, string league, bool refresh)
+		//{
+		//	var request = GetHttpRequest(HttpMethod.POST, string.Format(stashURL, league, index));
+		//	var response = (HttpWebResponse) request.GetResponse();
 
-			var stream = getMemoryStreamFromResponse(response);
+		//	var stream = GetMemoryStreamFromResponse(response);
 
-			var reader = new StreamReader(stream);
+		//	var reader = new StreamReader(stream);
 
-			var contents = reader.ReadToEnd();
+		//	var contents = reader.ReadToEnd();
 
-			var dir = Directory.CreateDirectory(@".\data");
-			var filename = string.Format("tab{0}.json", index);
-			var fullFilename = Path.Combine(dir.FullName, filename);
-			using (var writer = File.CreateText(fullFilename))
-			{
-				writer.Write(contents);
-				Console.WriteLine(string.Format("Created: {0}", filename));
-			}
+		//	var dir = Directory.CreateDirectory(@".\data");
+		//	var filename = string.Format("tab{0}.json", index);
+		//	var fullFilename = Path.Combine(dir.FullName, filename);
+		//	using (var writer = File.CreateText(fullFilename))
+		//	{
+		//		writer.Write(contents);
+		//		Console.WriteLine(string.Format("Created: {0}", filename));
+		//	}
 
-			stream.Position = 0;
-			return stream;
-		}
+		//	stream.Position = 0;
+		//	return stream;
+		//}
 
 		public Stream GetCharacters()
 		{
-			var request = getHttpRequest(HttpMethod.GET, characterURL);
+			var request = GetHttpRequest(HttpMethod.GET, characterURL);
 			var response = (HttpWebResponse) request.GetResponse();
 
-			return getMemoryStreamFromResponse(response);
+			return GetMemoryStreamFromResponse(response);
 		}
 
 		public Stream GetInventory(string characterName)
 		{
-			var request = getHttpRequest(HttpMethod.GET, string.Format(inventoryURL, characterName));
+			var request = GetHttpRequest(HttpMethod.GET, string.Format(inventoryURL, characterName));
 			var response = (HttpWebResponse) request.GetResponse();
 
-			return getMemoryStreamFromResponse(response);
+			return GetMemoryStreamFromResponse(response);
 		}
 
-		private MemoryStream getMemoryStreamFromResponse(HttpWebResponse response)
+		private MemoryStream GetMemoryStreamFromResponse(HttpWebResponse response)
 		{
 			var reader = new StreamReader(response.GetResponseStream());
 			var buffer = reader.ReadAllBytes();

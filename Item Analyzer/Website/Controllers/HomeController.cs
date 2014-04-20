@@ -9,10 +9,13 @@ namespace Website.Controllers
 	{
 		public ActionResult Index(string email, string password)
 		{
+			if (string.IsNullOrWhiteSpace( email ))
+				return null;
+			
 			var securePassword = new SecureString();
 			password.ToCharArray().ToList().ForEach(securePassword.AppendChar);
 
-			var transport = new HttpTransport(email);
+			var transport = new HttpTransport();
 
 			transport.Authenticate(email, securePassword, false);
 
