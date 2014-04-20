@@ -1,0 +1,56 @@
+﻿@using System.Linq
+@model dynamic
+
+@{
+	ViewBag.Title = "Items";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="section">
+	<div id="itemList"></div>
+</div>
+
+
+@section scripts{
+	
+	<script>
+
+		$(function() {
+
+			$.ajax({
+				url: "/api/items",
+			}).done(function(data) {
+				console.log(data);
+				updateTable(data);
+			});
+
+
+		});
+
+		function updateTable(result) {
+			var container = $("div#itemList");
+			container.empty();
+			container.loadTemplate($("#items-template"), result.Items);
+		}
+
+	</script>
+	
+	<script type="text/html" id="items-template">
+		<div class="list-item">
+		<div class="inline-block">
+			<img data-src="Icon" />
+		</div>
+		<div class="inline-block">
+			<div class="item-header" data-content="Name"></div>
+			<div>
+				<div data-content="TypeLine"></div>
+			</div>
+		</div>
+		<div class="inline-block">
+			<div data-content="ExplicitMods">
+				<div data-content="Name"></div>
+			</div>
+		</div>
+	</script>
+}

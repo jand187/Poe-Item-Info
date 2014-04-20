@@ -8,6 +8,7 @@ namespace PoeItemInfo.Model
 		public Data.Model.JSonProxy.Item Original { get; set; }
 
 		public string Name { get; set; }
+		public string Icon { get; set; }
 		public string TypeLine { get; set; }
 		public bool Identified { get; set; }
 		public bool Corrupted { get; set; }

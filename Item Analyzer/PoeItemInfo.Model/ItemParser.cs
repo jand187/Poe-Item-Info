@@ -25,7 +25,8 @@ namespace PoeItemInfo.Model
 			return new Item
 			{
 				Original = item,
-				Name = item.name,
+				Name = string.IsNullOrWhiteSpace(item.name) ? item.typeLine : item.name,
+				Icon = item.icon,
 				TypeLine = item.typeLine,
 				Identified = item.identified,
 				Corrupted = item.corrupted,
