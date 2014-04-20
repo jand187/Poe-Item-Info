@@ -1,13 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using PoeItemInfo.Data.Model.JSonProxy;
 
 namespace PoeItemInfo.Model
 {
-	public class ItemParser
+	public interface IItemParser
 	{
+		Item Parse(Data.Model.JSonProxy.Item item);
+	}
+
+	public class ItemParser : IItemParser
+	{
+		private readonly IPropertyParser propertyParser;
+		private readonly IRequirementParser requirementParser;
+		private readonly IModsParser modsParser;
+
+		public ItemParser(IPropertyParser propertyParser, IRequirementParser requirementParser, IModsParser modsParser)
+		{
+			this.propertyParser = propertyParser;
+			this.requirementParser = requirementParser;
+			this.modsParser = modsParser;
+		}
+
 		public Item Parse(Data.Model.JSonProxy.Item item)
 		{
 			return new Item
@@ -18,6 +32,10 @@ namespace PoeItemInfo.Model
 				Identified = item.identified,
 				Corrupted = item.corrupted,
 				Quality = GetQuality(item),
+				Properties = propertyParser.Parse(item.properties),
+				Requirements = requirementParser.Parse(item.requirements),
+				ExplicitMods = modsParser.Parse((item.explicitMods)),
+				ImplicitMods = modsParser.Parse((item.implicitMods)),
 			};
 		}
 
