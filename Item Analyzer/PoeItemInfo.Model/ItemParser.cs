@@ -1,10 +1,15 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using PoeItemInfo.Data.Model.JSonProxy;
 
 namespace PoeItemInfo.Model
 {
 	public interface IItemParser
 	{
 		Item Parse(Data.Model.JSonProxy.Item item);
+		IEnumerable<Item> Parse(Stash stash);
 	}
 
 	public class ItemParser : IItemParser
@@ -42,6 +47,11 @@ namespace PoeItemInfo.Model
 				},
 				SocketedItems = item.socketedItems != null ? item.socketedItems.Select(Parse) : new Item[0],
 			};
+		}
+
+		public IEnumerable<Item> Parse(Stash stash)
+		{
+			return stash.items.Select(Parse);
 		}
 	}
 }

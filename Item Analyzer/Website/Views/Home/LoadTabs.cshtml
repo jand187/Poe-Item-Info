@@ -25,7 +25,6 @@
 </div>
 
 <div id="tabs" class="section">
-	<div>test tab</div>
 </div>
 
 @section scripts{
@@ -53,6 +52,12 @@
 			container.empty();
 			container.loadTemplate($("#tab-info-form-template"), tabList.Tabs);
 
+			container.find("form").removeClass("neverLoaded");
+
+			var form = container.find("span.dateLoaded:contains('never')").parent().parent().parent();
+			form.addClass("neverLoaded");
+			form.children("div").children("button").text("Load");
+
 			container.find("button.loadTab").click(function(e) {
 				event.preventDefault();
 				var button = $(e.currentTarget);
@@ -75,18 +80,18 @@
 	<script type="text/html" id="tab-info-form-template">
 		<form class="form-inline tab-info list-item">
 			<div class="tab-info-div">
-				<button class="form-control btn-primary pull-right loadTab" data-value="Index">Load</button>
+				<button class="form-control btn-primary pull-right loadTab" data-value="Index">Update</button>
 				<div><span data-content="Name" class="h4"></span></div>
-				<div class="x-small">Index:<span data-content="Index"></span> Loaded:<span data-content="Loaded"></span></div>
+				<div class="x-small">Index:<span data-content="Index"></span> Loaded:<span class="dateLoaded" data-content="Loaded"></span></div>
 			</div>
 		</form>
 	</script>
 	
 	<script type="text/html" id="tab-info-template">
 		<div class="tab-info-div">
-			<button class="form-control btn-primary pull-right loadTab" data-value="Index">Load</button>
+			<button class="form-control btn-primary pull-right loadTab" data-value="Index">Update</button>
 			<div><span data-content="Name" class="h4"></span></div>
-			<div class="x-small">Index:<span data-content="Index"></span> Loaded:<span data-content="Loaded"></span></div>
+			<div class="x-small">Index:<span data-content="Index"></span> Loaded:<span class="dateLoaded" data-content="Loaded"></span></div>
 		</div>
 	</script>
 }

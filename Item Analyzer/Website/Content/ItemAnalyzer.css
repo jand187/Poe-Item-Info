@@ -37,3 +37,24 @@ form.tab-info {
 .item-header {
 	font-size: 18px;
 }
+
+.icon-frame {
+	padding: 5px;
+	background-color: #000;
+	-moz-border-radius: 5px;
+	border-radius: 5px;}
+
+.white {
+	background-color: #fff;
+}
+
+.framed {
+	border: 1px solid #aaa;
+	padding: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.neverLoaded {
+	background-color: #d3d3d3;
+}

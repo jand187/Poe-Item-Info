@@ -29,28 +29,43 @@
 		});
 
 		function updateTable(result) {
-			var container = $("div#itemList");
+			var container = $("#itemList");
 			container.empty();
 			container.loadTemplate($("#items-template"), result.Items);
+
+			var explicitModsContainer = container.find("div.explicit-mods");
+			var len = explicitModsContainer.length;
+			for (var i = 0; i  < len; i++) {
+				var modContainer = $(explicitModsContainer[i]);
+				if (result.Items[i] != undefined && result.Items[i].ExplicitMods != undefined) {
+					console.log(i + " ok");
+					modContainer.loadTemplate($("#explicit-mods-template"), result.Items[i].ExplicitMods);
+				}
+			}
 		}
 
 	</script>
 	
 	<script type="text/html" id="items-template">
 		<div class="list-item">
-		<div class="inline-block">
-			<img data-src="Icon" />
-		</div>
-		<div class="inline-block">
-			<div class="item-header" data-content="Name"></div>
-			<div>
-				<div data-content="TypeLine"></div>
+			<div class="inline-block icon-frame">
+				<img data-src="Icon" />
 			</div>
-		</div>
-		<div class="inline-block">
-			<div data-content="ExplicitMods">
-				<div data-content="Name"></div>
+			<div class="inline-block">
+				<div class="item-header" data-content="Name"></div>
+				<div class="inline-block framed">
+					<div>
+						<div data-content="TypeLine"></div>
+					</div>
+				</div>
+				<div class="inline-block explicit-mods framed">
+				</div>
 			</div>
 		</div>
 	</script>
-}
+	
+	<script type="text/html" id="explicit-mods-template">
+		<div data-content="Name"></div>
+	</script>
+
+	}

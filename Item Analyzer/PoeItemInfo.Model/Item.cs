@@ -15,8 +15,8 @@ namespace PoeItemInfo.Model
 		public int Quality { get; set; }
 		public IEnumerable<ItemProperty> Properties { get; set; }
 		public IEnumerable<ItemRequirement> Requirements { get; set; }
-		public IEnumerable<ItemMod> ExplicitMods { get; set; }
-		public IEnumerable<ItemMod> ImplicitMods { get; set; }
+		public IEnumerable<IItemMod> ExplicitMods { get; set; }
+		public IEnumerable<IItemMod> ImplicitMods { get; set; }
 		public ItemLocation Location { get; set; }
 		public IEnumerable<Item> SocketedItems { get; set; }
 	}
@@ -33,9 +33,14 @@ namespace PoeItemInfo.Model
 		public string Value { get; set; }
 	}
 
-	public class ItemMod
+	public interface IItemMod
 	{
-		public string Name { get; set; }
+		string Name { get; set; }
+	}
+
+	public interface IItemModFactory
+	{
+		IItemMod Create(string modString);
 	}
 
 	public class ItemLocation
