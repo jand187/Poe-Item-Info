@@ -24,7 +24,7 @@
 		$(function() {
 
 			$.ajax({
-				url: "/api/items",
+				url: "/api/items?category=Unknown",
 			}).done(function(data) {
 				//console.log(data);
 				updateTable(data);

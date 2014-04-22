@@ -59,11 +59,18 @@ namespace PoeItemInfo.Model
 	public class ItemType
 	{
 		public string Type { get; set; }
-		public ItemCategory Category { get; set; }
+		public ItemCategories Category { get; set; }
 		public string BaseType { get; set; }
 	}
 
-	public enum ItemCategory
+	public class ItemTypeX
+	{
+		public string Type { get; set; }
+		public string Category { get; set; }
+		public string BaseType { get; set; }
+	}
+
+	public enum ItemCategories
 	{
 		Unknown,
 		Weapon,

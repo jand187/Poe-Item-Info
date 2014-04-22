@@ -1,0 +1,99 @@
+﻿@using System.Linq
+@using PoeItemInfo.Model
+@model Website.Controllers.CategoriesControllerModel
+
+@{
+	ViewBag.Title = "title";
+}
+
+<h2>title</h2>
+
+<div class="section">
+	<form id="categoriesForm">
+		<div class="inline-block">
+			<h6>All</h6>
+			<ul id="gross-list">
+				@foreach (var item in Model.Items.Where(i => i.Category == "Unknown").Select(i => new {i.TypeLine, i.Icon}).Distinct())
+				{
+					<li><img src="@item.Icon" /><span>@item.TypeLine </span></li>
+				}
+			</ul>
+		</div>
+		<div class="inline-block">
+		<div>
+			<div class="inline-block">
+				@Html.DropDownList("basetype", new SelectList(Model.Items.Select(i => i.BaseType).Distinct().Concat(new[] {"<new>"})))
+				@Html.TextBox("basetype")
+			</div>
+			<div class="inline-block">
+				@Html.DropDownList("category", new SelectList(Enum.GetNames(typeof (ItemCategories))))
+			</div>
+			<div class="inline-block">
+				<button id="Save">Save</button>
+			</div>
+			<div>
+				<ul id="pick-list"></ul>
+			</div>
+		</div>
+	</form>
+</div>
+@section scripts {
+	<script>
+
+		$(function() {
+			$("input#basetype").hide();
+
+			$("ul#gross-list li").click(function() {
+				$("ul#pick-list").append(this);
+			});
+
+			$("select#basetype").change(function(elm) {
+				var baseType = $("select#basetype option:selected").text();
+				if (baseType == "<new>") {
+					$("input#basetype").show();
+				} else {
+					$("input#basetype").hide();
+				}
+			});
+
+			$("button#Save").click(function() {
+				event.preventDefault();
+
+				var items = $("ul#pick-list li");
+				var category = $("select#category option:selected").text();
+				var baseType = $("select#basetype option:selected").text();
+				if (baseType == "<new>")
+					baseType = $("input#basetype").val();
+
+				var itemsToSave = new Array();
+
+				for (var i = 0; i < items.length; i++) {
+					var item = {
+						Category: category,
+						BaseType: baseType,
+						Type: $(items[i]).text()
+					}
+					itemsToSave.push(item);
+				}
+
+				console.log(JSON.stringify(itemsToSave));
+
+
+				var sss = {
+					itemTypes: { Category: "Unknown", BaseType: "Ring", Type: "Silk Slippers" }
+				};
+				$.post("/api/categories", sss);
+				//$.ajax({
+				//	url: "/api/categories",
+				//	type: "POST",
+				//	data: sss,
+				//	dataType: "json"
+				//});
+			});
+
+		});
+
+
+	</script>
+
+}
