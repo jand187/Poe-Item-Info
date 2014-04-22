@@ -23,29 +23,34 @@ namespace PoeItemInfo.Model
 			itemModFactories = new IItemModFactory[]
 			{
 				new PercentageIncreasedModFactory(),
+				new PlusToModFactory(),
 				new UnknownModFactory(),
 			};
 		}
 
 		public IEnumerable<IItemMod> Parse(IEnumerable<string> mods)
 		{
+			var modList = new List<IItemMod>();
+
 			if (mods == null)
-				yield break;
+				return modList;
 
 			foreach (var mod in mods)
 			{
-				IItemMod itemMod = new UnknownMod();
 				foreach (var factory in itemModFactories)
 				{
-					itemMod = factory.Create(mod);
-					if (itemMod.GetType() != typeof (UnknownMod))
+					var itemMod = factory.Create(mod);
+					if (itemMod != null)
 					{
-						yield return itemMod;
+						modList.Add(itemMod);
+						break;
 					}
 				}
-
-				yield return itemMod;
 			}
+
+			//modList.Add(new UnknownMod {DisplayText = mod});
+			
+			return modList;
 		}
 	}
 }

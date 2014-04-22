@@ -35,7 +35,8 @@ namespace PoeItemInfo.Model
 
 	public interface IItemMod
 	{
-		string Name { get; set; }
+		string Name { get;  }
+		string DisplayText { get;  }
 	}
 
 	public interface IItemModFactory

@@ -8,7 +8,12 @@
 <h2>@ViewBag.Title</h2>
 
 <div class="section">
-	<div id="itemList"></div>
+	<div id="itemList">
+		<div class="text-center">
+			<div><img src="~/Content/images/ajax-loader.gif" /></div>
+			<div>Loading items list.. </div>
+		</div>
+	</div>
 </div>
 
 
@@ -65,7 +70,7 @@
 	</script>
 	
 	<script type="text/html" id="explicit-mods-template">
-		<div data-content="Name"></div>
+		<div data-content="DisplayText"></div>
 	</script>
 
 	}

@@ -24,13 +24,30 @@ namespace PoeItemInfo.ModelTest
 		[Fact]
 		public void ShouldParsePercentageIncreasedMod()
 		{
+			var modString = "39% increased Armour and Evasion";
 			var mods = new []
 			{
-				"39% increased Armour and Evasion",
+				modString,
 			};
 
-			var itemMods = new ModsParser().Parse(mods);
-			itemMods.First().Should().BeOfType<PercentageIncreasedMod>();
+			var mod = new ModsParser().Parse(mods).Single();
+			mod.Should().BeOfType<PercentageIncreasedMod>();
+			mod.DisplayText.Should().Be(modString);
 		}
+
+		[Fact]
+		public void ShouldParsePlusToMod()
+		{
+			var modString = "+23 to Strength";
+			var mods = new[]
+			{
+				modString,
+			};
+
+			var mod = new ModsParser().Parse(mods).Single();
+			mod.Should().BeOfType<PlusToMod>();
+			mod.DisplayText.Should().Be(modString);
+		}
+
 	}
 }
