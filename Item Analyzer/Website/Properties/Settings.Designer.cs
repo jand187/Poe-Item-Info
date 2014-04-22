@@ -31,5 +31,14 @@ namespace Website.Properties {
                 return ((string)(this["DataDirectory"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\janand\\AppData\\Roaming\\Item Analyzer")]
+        public string AppDirectory {
+            get {
+                return ((string)(this["AppDirectory"]));
+            }
+        }
     }
 }

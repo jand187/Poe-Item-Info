@@ -17,7 +17,7 @@ namespace Website.API
 			this.itemParser = itemParser;
 		}
 
-		public ItemsController() : this(new ItemParser(new PropertyParser(), new RequirementParser(), new ModsParser()))
+		public ItemsController() : this(new ItemParser(new PropertyParser(), new RequirementParser(), new ModsParser(), new ItemTypeParser()))
 		{
 		}
 
@@ -34,7 +34,7 @@ namespace Website.API
 			return new
 			{
 				Success = true,
-				Items = list,
+				Items = list.Where(i=>i.Category == ItemCategory.Unknown.ToString()),
 			};
 		}
 	}

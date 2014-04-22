@@ -51,6 +51,7 @@
     <Compile Include="ItemParserTest.cs" />
     <Compile Include="ModsParserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyParserTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ItemTypeParser.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="ItemParser.cs" />
     <Compile Include="ItemTab.cs" />

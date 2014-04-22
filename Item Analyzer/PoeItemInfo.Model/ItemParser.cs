@@ -17,12 +17,14 @@ namespace PoeItemInfo.Model
 		private readonly IPropertyParser propertyParser;
 		private readonly IRequirementParser requirementParser;
 		private readonly IModsParser modsParser;
+		private readonly IItemTypeParser itemTypeParser;
 
-		public ItemParser(IPropertyParser propertyParser, IRequirementParser requirementParser, IModsParser modsParser)
+		public ItemParser(IPropertyParser propertyParser, IRequirementParser requirementParser, IModsParser modsParser, IItemTypeParser itemTypeParser)
 		{
 			this.propertyParser = propertyParser;
 			this.requirementParser = requirementParser;
 			this.modsParser = modsParser;
+			this.itemTypeParser = itemTypeParser;
 		}
 
 		public Item Parse(Data.Model.JSonProxy.Item item)
@@ -39,6 +41,7 @@ namespace PoeItemInfo.Model
 				Requirements = requirementParser.Parse(item.requirements),
 				ExplicitMods = modsParser.Parse((item.explicitMods)),
 				ImplicitMods = modsParser.Parse((item.implicitMods)),
+				FrameType = item.frameType,
 				Location = new ItemLocation
 				{
 					InventoryId = item.inventoryId,
@@ -46,6 +49,7 @@ namespace PoeItemInfo.Model
 					Y = item.y,
 				},
 				SocketedItems = item.socketedItems != null ? item.socketedItems.Select(Parse) : new Item[0],
+				ItemType = itemTypeParser.Parse(item),
 			};
 		}
 

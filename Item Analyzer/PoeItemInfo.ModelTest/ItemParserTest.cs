@@ -15,13 +15,16 @@ namespace PoeItemInfo.ModelTest
 		private readonly IPropertyParser propertyParserMock;
 		private readonly IRequirementParser requirementParserMock;
 		private readonly IModsParser modsParserMock;
+		private readonly IItemTypeParser itemTypeParser;
 
 		public ItemParserTest()
 		{
 			propertyParserMock = Substitute.For<IPropertyParser>();
 			requirementParserMock = Substitute.For<IRequirementParser>();
 			modsParserMock = Substitute.For<IModsParser>();
-			itemParser = new ItemParser(propertyParserMock, requirementParserMock, modsParserMock);
+			itemTypeParser = Substitute.For<IItemTypeParser>();
+
+			itemParser = new ItemParser(propertyParserMock, requirementParserMock, modsParserMock, itemTypeParser);
 		}
 
 		[Fact]
@@ -36,7 +39,7 @@ namespace PoeItemInfo.ModelTest
 		}
 
 		[Fact]
-		public void ShouldParseCategory()
+		public void ShouldParseName()
 		{
 			var original = new GenericBuilder<Item>()
 				.Item()
@@ -136,6 +139,19 @@ namespace PoeItemInfo.ModelTest
 		}
 
 		[Fact]
+		public void ShouldParseFrameType()
+		{
+			var original = new GenericBuilder<Item>()
+				.Item()
+				.With(item => item.frameType = 9)
+				.Build();
+
+			var parsedItem = itemParser.Parse(original);
+			parsedItem.FrameType.Should().Be(9);
+		}
+
+
+		[Fact]
 		public void ShouldParseLocation()
 		{
 			var original = new GenericBuilder<Item>()
@@ -166,6 +182,21 @@ namespace PoeItemInfo.ModelTest
 
 			var parsedItem = itemParser.Parse(original);
 			parsedItem.SocketedItems.First().Name.Should().Be(name);
+		}
+
+		[Fact]
+		public void ShouldParseItemType()
+		{
+			var original = new GenericBuilder<Item>()
+				.Item()
+				.Build();
+			var itemType = new ItemType();
+			itemTypeParser.Parse(original).Returns(itemType);
+			
+			var parsedItem = itemParser.Parse(original);
+			
+			itemTypeParser.Received().Parse(original);
+			parsedItem.ItemType.Should().Be(itemType);
 		}
 	}
 }

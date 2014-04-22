@@ -26,11 +26,9 @@
 			$.ajax({
 				url: "/api/items",
 			}).done(function(data) {
-				console.log(data);
+				//console.log(data);
 				updateTable(data);
 			});
-
-
 		});
 
 		function updateTable(result) {
@@ -43,7 +41,7 @@
 			for (var i = 0; i  < len; i++) {
 				var modContainer = $(explicitModsContainer[i]);
 				if (result.Items[i] != undefined && result.Items[i].ExplicitMods != undefined) {
-					console.log(i + " ok");
+					//console.log(i + " ok");
 					modContainer.loadTemplate($("#explicit-mods-template"), result.Items[i].ExplicitMods);
 				}
 			}
@@ -61,6 +59,7 @@
 				<div class="inline-block framed">
 					<div>
 						<div data-content="TypeLine"></div>
+						<div><span data-content="BaseType"></span> (<span data-content="Category"></span>)</div>
 					</div>
 				</div>
 				<div class="inline-block explicit-mods framed">

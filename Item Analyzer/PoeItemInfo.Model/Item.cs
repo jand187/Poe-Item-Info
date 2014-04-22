@@ -19,6 +19,11 @@ namespace PoeItemInfo.Model
 		public IEnumerable<IItemMod> ImplicitMods { get; set; }
 		public ItemLocation Location { get; set; }
 		public IEnumerable<Item> SocketedItems { get; set; }
+		public int FrameType { get; set; }
+		public ItemType ItemType { get; set; }
+		
+		public string BaseType { get { return ItemType.BaseType; } }
+		public string Category { get { return ItemType.Category.ToString(); } }
 	}
 
 	public class ItemProperty
@@ -49,5 +54,22 @@ namespace PoeItemInfo.Model
 		public string InventoryId { get; set; }
 		public int X { get; set; }
 		public int Y { get; set; }
+	}
+
+	public class ItemType
+	{
+		public string Type { get; set; }
+		public ItemCategory Category { get; set; }
+		public string BaseType { get; set; }
+	}
+
+	public enum ItemCategory
+	{
+		Unknown,
+		Weapon,
+		Armour,
+		Jewelery,
+		SkillGem,
+		Currency,
 	}
 }
