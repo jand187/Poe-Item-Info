@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Website", "Website\Website.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoeItemInfo.Transport", "PoeItemInfo.Transport\PoeItemInfo.Transport.csproj", "{3835614E-D670-4217-88CE-3B9C1AF92593}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoeItemInfo.Website", "PoeItemInfo.Website\PoeItemInfo.Website.csproj", "{A7A43598-9272-4FA5-85CA-C4DA3AD8903A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{3835614E-D670-4217-88CE-3B9C1AF92593}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3835614E-D670-4217-88CE-3B9C1AF92593}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3835614E-D670-4217-88CE-3B9C1AF92593}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7A43598-9272-4FA5-85CA-C4DA3AD8903A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7A43598-9272-4FA5-85CA-C4DA3AD8903A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7A43598-9272-4FA5-85CA-C4DA3AD8903A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7A43598-9272-4FA5-85CA-C4DA3AD8903A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
