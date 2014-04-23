@@ -4,63 +4,68 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Items - My ASP.NET Application</title>
-
+		
 		<link href="Content/bootstrap.css" rel="stylesheet" />
 		<link href="Content/site.css" rel="stylesheet" />
 		<script src="Scripts/angular.js"></script>
 		<script src="Scripts/angular-route.js"></script>
-
+		<script src="Scripts/angular-resource.js"></script>
 	</head>
 	<body>
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
-				<div class="navbar-collapse collapse">
-					<ul class="nav navbar-nav">
-						<li>Home</li>
-					</ul>
-				</div>
+				<ul class="nav navbar-nav">
+					<li><a ng-href="#/items">Home</a></li>
+				</ul>
 			</div>
 		</div>
 		<div class="container body-content">
 			<div ng-view=""></div>
-			<hr />
-			<footer>
-				<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-			</footer>
+			
+			<div>
+				<hr />
+				<footer>
+					<p>&copy; Jan Daniel Andersen </p>
+				</footer>
+			</div>
 		</div>
-		
-		
-
 
 	</body>
 
 
 	<script>
-		var itemAnalyzer = angular.module("itemAnalyzer", ["ngRoute"])
-			.factory("itemsFactory", function($http) {
-				var factory = {};
-				factory.getItems = function() {
-					return $http.get("api/items");
-				};
-				return factory;
-			})
+		var itemAnalyzer = angular.module("itemAnalyzer", ["ngRoute", "ngResource"])
+			.factory("itemsFactory", [
+				"$resource",
+				function($resource) {
+					return $resource('api/items', {}, {
+						query: { method: 'GET', params: {}, isArray: true },
+						getCategories: { method: 'GET', params: {}, isArray: true }
+					});
+				}
+			])
 			.config(function($routeProvider) {
 				$routeProvider
-					.when("/",
+					.when("/items",
 					{
 						controller: "itemsController",
 						templateUrl: "Spa/partials/itemsList.html"
 					})
+					.when("/categories",
+					{
+						controller: "editCategoriesController",
+						templateUrl: "Spa/partials/editCategories.html"
+					})
 					.otherwise({
-						redirectTo: "/"
+						redirectTo: "/items"
 					});
 			})
 			.controller("itemsController", function($scope, itemsFactory) {
-				itemsFactory.getItems().success(function(data) {
-					$scope.items = data;
-				});
-				console.log($scope.items);
-
+				$scope.items = itemsFactory.query();
+			})
+			.controller("editCategoriesController", function($scope, itemsFactory) {
+				$scope.items = itemsFactory.getCategories({ $top: 20, $select: "TypeLine, Icon" });
 			});
+
 	</script>
 </html>

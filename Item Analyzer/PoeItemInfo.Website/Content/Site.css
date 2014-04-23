@@ -39,6 +39,20 @@ textarea {
 	padding:1px;
 }
 
+.icon {
+	width: 94px;
+	height: 189px;
+	padding:1px;
+}
+
+.item-box .section.properties {
+	width: 300px;
+}
+
+.item-box .section.mods {
+	width: 300px;
+}
+
 .header {
 	font-size: 18px;
 }

@@ -38,62 +38,23 @@ namespace PoeItemInfo.Website.Api
 			return LoadItems();
 		}
 
-		public IEnumerable<Item> Get()
+		[Queryable]
+		public IQueryable<Item> Get()
 		{
-			return new[]
-			{
-				new Item
-				{
-					Name = "Horror Grip",
-					ItemType = new ItemType
-					{
-						BaseType = "Gloves",
-						Category = ItemCategories.Armour,
-						Type = "Samite Gloves"
-					},
-					Icon = @"http:\/\/webcdn.pathofexile.com\/image\/Art\/2DItems\/Armours\/Helmets\/HelmetStrInt4.png?scale=1&w=2&h=2&v=fa25d2b751889f688486d20fb79dacb93",
-				},
-				new Item
-				{
-					Name = "Wideswing",
-					ItemType = new ItemType
-					{
-						BaseType = "Two Handed Axe",
-						Category = ItemCategories.Weapon,
-						Type = "Poleaxe"
-					},
-					Icon = @"http:\/\/webcdn.pathofexile.com\/image\/Art\/2DItems\/Weapons\/TwoHandWeapons\/TwoHandAxes\/Wideswing.png?scale=1&w=2&h=4&v=abf4d162c7297ee1d6871ec1f24afa583",
-				},
-				new Item
-				{
-					Name = "Bramble Crest",
-					ItemType = new ItemType
-					{
-						BaseType = "Helmet",
-						Category = ItemCategories.Armour,
-						Type = "Ursine Pelt"
-					},
-					Icon = @"http:\/\/webcdn.pathofexile.com\/image\/Art\/2DItems\/Armours\/Helmets\/HelmetDex7.png?scale=1&w=2&h=2&v=8d01ba9ab32a8d671bcc66c25c0e90ec3",
-				}
-			};
+			return LoadItems();
 		}
 
 
-		private IEnumerable<Item> LoadItems(params Func<Item, bool>[] predicates)
+		private IQueryable<Item> LoadItems(params Func<Item, bool>[] predicates)
 		{
 			var stashFiles = Directory.GetFiles(Settings.Default.OfficialFiles, "*.json");
 
-			var list = stashFiles
+			var list = stashFiles.AsQueryable()
 				.Select(File.ReadAllText)
 				.Select(JsonConvert.DeserializeObject<Stash>)
 				.SelectMany(stash => itemParser.Parse(stash));
 
-			foreach (var predicate in predicates)
-			{
-				list = list.Where(i => predicate.Invoke(i));
-			}
-
-			return list;
+			return predicates.Aggregate(list, (current, predicate) => current.Where(predicate.Invoke)).AsQueryable();
 		}
 
 		private IEnumerable<ItemType> LoadItemTypeMap()

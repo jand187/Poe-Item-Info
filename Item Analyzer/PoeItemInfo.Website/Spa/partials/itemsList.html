@@ -6,16 +6,16 @@
 			<div class="header">
 				{{item.Name}}
 			</div>
-			<div class="section bordered padded">
+			<div class="section bordered padded properties">
 				<div class="properties">
 					<div>{{item.ItemType.Type}}</div>
 					<div>{{item.ItemType.BaseType}}</div>
 					<div>{{item.ItemType.Category}}</div>
 				</div>
 			</div>
-			<div class="section bordered padded">
+			<div class="section bordered padded mods">
 				<div class="properties" ng-repeat="mod in item.ExplicitMods">
-					<div>{{mod.Name}}</div>
+					<div>{{mod.DisplayText}}</div>
 				</div>
 			</div>
 
