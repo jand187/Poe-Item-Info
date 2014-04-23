@@ -16,3 +16,46 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.item-box {
+	background-color: #eee;
+	border: 1px solid #888;
+	border-radius: 5px;
+	padding: 10px;
+	margin-bottom: 5px;
+	list-style-position: outside;
+	list-style: none;
+}
+
+.item-box .section {
+	vert-align: top;
+	vertical-align: top;
+	display: inline-block;
+}
+
+.item-box .section.icon {
+	width: 94px;
+	height: 189px;
+	padding:1px;
+}
+
+.header {
+	font-size: 18px;
+}
+
+.bordered {
+	border: 1px solid #888;
+	border-radius: 3px;
+}
+
+.padded {
+	padding: 10px;
+}
+
+.black {
+	background-color: #000;
+}
+
+ul {
+	-webkit-padding-start: 0;
+}

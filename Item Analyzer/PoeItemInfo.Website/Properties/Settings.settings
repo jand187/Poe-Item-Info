@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PoeItemInfo.Website.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DataBaseDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Users\janand\AppData\Roaming\Item Analyzer\v.0.9\Data</Value>
+    </Setting>
+    <Setting Name="OfficialFiles" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Users\janand\AppData\Roaming\Item Analyzer\v.0.9\OfficialFiles</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
