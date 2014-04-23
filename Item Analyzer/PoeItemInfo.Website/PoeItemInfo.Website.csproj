@@ -166,12 +166,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\BaseTypesController.cs" />
     <Compile Include="Api\ItemsController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TypesAndCategoriesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -197,6 +199,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="main.html">
+      <BrowseToURL>~/main.html</BrowseToURL>
+    </Content>
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-cookies.js" />
@@ -492,6 +497,7 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Spa\partials\itemsList.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -506,6 +512,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\TypesAndCategories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -543,7 +550,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>57793</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:57793/</IISUrl>
+          <IISUrl>http://localhost:60000/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

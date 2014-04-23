@@ -13,7 +13,7 @@ namespace PoeItemInfo.Website.Api
 {
 	public class ItemsController : ApiController
 	{
-		private IItemParser itemParser;
+		private readonly IItemParser itemParser;
 
 		public ItemsController()
 		{
@@ -27,11 +27,15 @@ namespace PoeItemInfo.Website.Api
 		}
 
 
-
 		public IEnumerable<Item> Post(IEnumerable<Specification> specification)
 		{
-			var filter = new Func<Item, bool>(i => i.Category == specification.First().Value);
-			return LoadItems(filter);
+			if (specification.Any())
+			{
+				var filter = new Func<Item, bool>(i => i.Category == specification.First().Value);
+				return LoadItems(filter);
+			}
+
+			return LoadItems();
 		}
 
 		public IEnumerable<Item> Get()
@@ -75,7 +79,6 @@ namespace PoeItemInfo.Website.Api
 		}
 
 
-
 		private IEnumerable<Item> LoadItems(params Func<Item, bool>[] predicates)
 		{
 			var stashFiles = Directory.GetFiles(Settings.Default.OfficialFiles, "*.json");
@@ -87,7 +90,7 @@ namespace PoeItemInfo.Website.Api
 
 			foreach (var predicate in predicates)
 			{
-				list = list.Where(i=> predicate.Invoke(i));
+				list = list.Where(i => predicate.Invoke(i));
 			}
 
 			return list;
@@ -102,7 +105,6 @@ namespace PoeItemInfo.Website.Api
 			var contents = File.ReadAllText(filename);
 			return JsonConvert.DeserializeObject<IEnumerable<ItemType>>(contents);
 		}
-
 	}
 
 	public class Specification

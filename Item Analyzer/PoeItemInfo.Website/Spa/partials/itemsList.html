@@ -1,0 +1,24 @@
+﻿<h3>Items</h3>
+<ul>
+	<li ng-repeat="item in items" class="item-box">
+		<div class="section bordered black icon"><img src="{{item.Icon}}" /></div>
+		<div class="section">
+			<div class="header">
+				{{item.Name}}
+			</div>
+			<div class="section bordered padded">
+				<div class="properties">
+					<div>{{item.ItemType.Type}}</div>
+					<div>{{item.ItemType.BaseType}}</div>
+					<div>{{item.ItemType.Category}}</div>
+				</div>
+			</div>
+			<div class="section bordered padded">
+				<div class="properties" ng-repeat="mod in item.ExplicitMods">
+					<div>{{mod.Name}}</div>
+				</div>
+			</div>
+
+		</div>
+	</li>
+</ul>
