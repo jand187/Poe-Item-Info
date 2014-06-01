@@ -63,10 +63,6 @@
 					$http.get("api/items/GetItems")
 						.success(function(data, status, headers, config) {
 							$scope.items = data;
-							console.log(data);
-						})
-						.error(function(data, status, headers, config) {
-							console.log("failed \r\n" + $scope.invoice);
 						});
 				};
 				$scope.GetItems();
@@ -79,7 +75,7 @@
 							console.log(data);
 						})
 						.error(function (data, status, headers, config) {
-							console.log("failed \r\n" + $scope.invoice);
+							console.log("failed \r\n");
 						});
 				};
 				$scope.tabs = $scope.GetItems();
