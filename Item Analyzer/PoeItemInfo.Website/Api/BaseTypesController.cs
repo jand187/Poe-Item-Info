@@ -9,14 +9,14 @@ namespace PoeItemInfo.Website.Api
 	{
 		public IEnumerable<dynamic> Get()
 		{
-			var specification = new Specification
+			var specification = new SimpleSpecification
 			{
 				Property = "Category",
 				Operation = "eq",
 				Value = ItemCategories.Unknown.ToString()
 			};
 
-			var specifications = new Specification[0];
+			var specifications = new SimpleSpecification[0];
 			var items = new ItemsController().Post(specifications);
 
 			return items.Select(item => new {item.TypeLine, item.ItemType}).Distinct();

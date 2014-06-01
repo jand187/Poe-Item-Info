@@ -70,6 +70,12 @@ namespace PoeItemInfo.Website.Api
 
 	public class Specification
 	{
+		public string Type { get; set; }
+		public int NumberOfItems { get; set; }
+	}
+
+	public class SimpleSpecification
+	{
 		public string Property { get; set; }
 		public string Value { get; set; }
 		public string Operation { get; set; }
