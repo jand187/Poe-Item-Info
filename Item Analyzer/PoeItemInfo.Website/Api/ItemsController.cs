@@ -26,16 +26,16 @@ namespace PoeItemInfo.Website.Api
 			this.itemParser = new ItemParser(propertyParser, requirementParser, modsParser, itemTypeParser);
 		}
 
-
-		public IEnumerable<Item> Post(IEnumerable<Specification> specification)
+		[Queryable]
+		[HttpPost]
+		public IQueryable<Item> GetItems(Specification specification)
 		{
-			if (specification.Any())
-			{
-				var filter = new Func<Item, bool>(i => i.Category == specification.First().Value);
-				return LoadItems(filter);
-			}
+			var filters = new List<Func<Item, bool>>();
 
-			return LoadItems();
+			if (!string.IsNullOrWhiteSpace(specification.Type))
+				filters.Add(i => i.BaseType == specification.Type);
+
+			return LoadItems(filters.ToArray());
 		}
 
 		[Queryable]
@@ -65,6 +65,17 @@ namespace PoeItemInfo.Website.Api
 
 			var contents = File.ReadAllText(filename);
 			return JsonConvert.DeserializeObject<IEnumerable<ItemType>>(contents);
+		}
+
+		public IQueryable<Item> Post(IEnumerable<SimpleSpecification> specifications)
+		{
+			if (specifications.Any())
+			{
+				var filter = new Func<Item, bool>(i => i.Category == specifications.First().Value);
+				return LoadItems(filter);
+			}
+
+			return LoadItems();
 		}
 	}
 
