@@ -54,6 +54,7 @@ namespace PoeItemInfo.Model
 		public string InventoryId { get; set; }
 		public int X { get; set; }
 		public int Y { get; set; }
+		public string Tab { get; set; }
 	}
 
 	public class ItemType
