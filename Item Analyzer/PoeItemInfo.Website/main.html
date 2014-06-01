@@ -38,7 +38,7 @@
 			.factory("itemsFactory", [
 				"$resource",
 				function($resource) {
-					return $resource('api/items', {}, {
+					return $resource('api/items/GetItems', {}, {
 						query: { method: 'GET', params: {}, isArray: true },
 						getCategories: { method: 'GET', params: {}, isArray: true }
 					});

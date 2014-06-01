@@ -39,7 +39,7 @@ namespace PoeItemInfo.Website.Api
 		}
 
 		[Queryable]
-		public IQueryable<Item> Get()
+		public IQueryable<Item> GetItems()
 		{
 			return LoadItems();
 		}
