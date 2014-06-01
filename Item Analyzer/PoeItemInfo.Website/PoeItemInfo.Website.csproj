@@ -538,7 +538,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -552,6 +551,10 @@
     <ProjectReference Include="..\PoeItemInfo.Model\PoeItemInfo.Model.csproj">
       <Project>{5A1CEB0F-5122-4414-9359-3C3064E3194C}</Project>
       <Name>PoeItemInfo.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PoeItemInfo.Transport\PoeItemInfo.Transport.csproj">
+      <Project>{3835614E-D670-4217-88CE-3B9C1AF92593}</Project>
+      <Name>PoeItemInfo.Transport</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
