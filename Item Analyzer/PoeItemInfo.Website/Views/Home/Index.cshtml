@@ -34,3 +34,25 @@
 </div>
 
 @Scripts.Render("~/Scripts/controllers/homeController.js")
+
+@section scripts
+{
+	<script>
+
+		$(function() {
+
+				$.ajax({
+					url: "http://www.pathofexile.com/character-window/get-stash-items",
+					type: "POST",
+					data: { league: "Standard", tabs: 1, tabIndex: 0 },
+					dataType: "html"
+				}).done(function(data) {
+					console.log(data);
+				});
+
+			}
+		);
+
+	</script>
+
+}
