@@ -40,5 +40,14 @@ namespace PoeItemInfo.Website.Properties {
                 return ((string)(this["OfficialFiles"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\janand\\AppData\\Roaming\\Item Analyzer\\v.0.9\\pw.dat")]
+        public string PasswordFile {
+            get {
+                return ((string)(this["PasswordFile"]));
+            }
+        }
     }
 }
