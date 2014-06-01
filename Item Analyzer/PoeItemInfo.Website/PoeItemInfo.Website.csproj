@@ -519,6 +519,7 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="Spa\partials\editCategories.html" />
     <Content Include="Spa\partials\itemsList.html" />
+    <Content Include="Spa\partials\stashList.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

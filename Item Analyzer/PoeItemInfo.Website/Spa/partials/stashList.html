@@ -1,0 +1,17 @@
+﻿<h3>Stash</h3>
+<ul>
+	<li ng-repeat="tab in tabs" class="item-box">
+		<div class="section">
+			<div class="section padded stash-name">
+				Name: {{tab.Name}}
+			</div>
+			<div class="section padded stash-last-updated">
+				Last updated: {{tab.LastUpdated}}
+			</div>
+			<div class="section padded stash-last-updated">
+				<img class="btn" style="position:absolute; padding: 4px 0px 0px 23px;" src="../../Content/images/spinner.GIF" ng-show="tab.updating" />
+				<button class="btn" ng-click="UpdateButtonClick(tab)" ng-disabled="tab.updating">Update</button>
+			</div>
+		</div>
+	</li>
+</ul>
