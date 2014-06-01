@@ -15,7 +15,9 @@
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
 				<ul class="nav navbar-nav">
-					<li><a ng-href="#/items">Home</a></li>
+					<li><a ng-href="#/items/list">Items</a></li>
+					<li><a ng-href="#/stash/list">Stash</a></li>
+					<li><a ng-href="#/categories">Categories</a></li>
 				</ul>
 			</div>
 		</div>
@@ -34,22 +36,18 @@
 
 
 	<script>
-		var itemAnalyzer = angular.module("itemAnalyzer", ["ngRoute", "ngResource"])
-			.factory("itemsFactory", [
-				"$resource",
-				function($resource) {
-					return $resource('api/items/GetItems', {}, {
-						query: { method: 'GET', params: {}, isArray: true },
-						getCategories: { method: 'GET', params: {}, isArray: true }
-					});
-				}
-			])
+		var itemAnalyzer = angular.module("itemAnalyzer", ["ngRoute"])
 			.config(function($routeProvider) {
 				$routeProvider
-					.when("/items",
+					.when("/items/list",
 					{
 						controller: "itemsController",
 						templateUrl: "Spa/partials/itemsList.html"
+					})
+					.when("/stash/list",
+					{
+						controller: "stashController",
+						templateUrl: "Spa/partials/stashList.html"
 					})
 					.when("/categories",
 					{
@@ -57,14 +55,34 @@
 						templateUrl: "Spa/partials/editCategories.html"
 					})
 					.otherwise({
-						redirectTo: "/items"
+						redirectTo: "/items/list"
 					});
 			})
-			.controller("itemsController", function($scope, itemsFactory) {
-				$scope.items = itemsFactory.query();
+			.controller("itemsController", function($scope, $http) {
+				$scope.GetItems = function() {
+					$http.get("api/items/GetItems")
+						.success(function(data, status, headers, config) {
+							$scope.items = data;
+							console.log(data);
+						})
+						.error(function(data, status, headers, config) {
+							console.log("failed \r\n" + $scope.invoice);
+						});
+				};
+				$scope.GetItems();
 			})
-			.controller("editCategoriesController", function($scope, itemsFactory) {
-				$scope.items = itemsFactory.getCategories({ $top: 20, $select: "TypeLine, Icon" });
+			.controller("stashController", function($scope, $http) {
+				$scope.GetTabs = function (index) {
+					$http.get("api/stash/GetTab/" + index)
+						.success(function (data, status, headers, config) {
+							$scope.items = data;
+							console.log(data);
+						})
+						.error(function (data, status, headers, config) {
+							console.log("failed \r\n" + $scope.invoice);
+						});
+				};
+				$scope.tabs = $scope.GetItems();
 			});
 
 	</script>
