@@ -43,7 +43,8 @@ namespace Website.API
 				Index = stashTab,
 				Name = tab.tabs.Single(t => t.i == stashTab).n,
 				Loaded = DateTime.Now.ToString("yyyy.MM.dd hh:mm:ss"),
-				NumberOfItems = tab.items.Count()
+				NumberOfItems = tab.items.Count(),
+				NumberOfTabs = tab.numTabs,
 			};
 		}
 
