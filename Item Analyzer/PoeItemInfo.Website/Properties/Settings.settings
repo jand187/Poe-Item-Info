@@ -8,5 +8,8 @@
     <Setting Name="OfficialFiles" Type="System.String" Scope="Application">
       <Value Profile="(Default)">C:\Users\janand\AppData\Roaming\Item Analyzer\v.0.9\OfficialFiles</Value>
     </Setting>
+    <Setting Name="PasswordFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Users\janand\AppData\Roaming\Item Analyzer\v.0.9\pw.dat</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
