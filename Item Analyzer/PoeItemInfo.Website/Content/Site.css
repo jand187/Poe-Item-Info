@@ -73,3 +73,11 @@ textarea {
 ul {
 	-webkit-padding-start: 0;
 }
+
+.stash-name {
+	width: 200px
+}
+
+.stash-last-updated {
+	width: 400px
+}
