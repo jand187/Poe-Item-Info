@@ -180,6 +180,7 @@
   <ItemGroup>
     <Compile Include="Api\BaseTypesController.cs" />
     <Compile Include="Api\ItemsController.cs" />
+    <Compile Include="Api\StashController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
