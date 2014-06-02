@@ -50,17 +50,39 @@
 			$http.get("api/stash/GetTab/?stashTab=" + index)
 				.success(function(data, status, headers, config) {
 					$scope.tabs = data.Tabs;
+
+					$http.get("api/stash/GetCharacters")
+						.success(function(data, status, headers, config) {
+							$scope.tabs = $scope.tabs.concat(data.Tabs);
+						});
+
 					if (callback != undefined)
 						callback();
-				})
-				.error(function(data, status, headers, config) {
-					console.log("failed \r\n");
 				});
 		};
 
+		$scope.GetCharacterTab = function (index, callback) {
+			$http.get("api/stash/GetCharacterTab/?character=" + index)
+				.success(function (data, status, headers, config) {
+					$scope.tabs = data.Tabs;
+
+					$http.get("api/stash/GetCharacters")
+						.success(function (data, status, headers, config) {
+							$scope.tabs = $scope.tabs.concat(data.Tabs);
+						});
+
+					if (callback != undefined)
+						callback();
+				});
+		}
+
 		$scope.UpdateButtonClick = function(tab) {
 			tab.updating = true;
-			$scope.GetTab(tab.Id, function() { tab.updating = false; });
+			if (tab.Type == "stash") {
+				$scope.GetTab(tab.Id, function() { tab.updating = false; });
+			} else {
+				$scope.GetCharacterTab(tab.Id, function () { tab.updating = false; });
+			}
 		};
 
 		$scope.GetTab(0);

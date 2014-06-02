@@ -12,6 +12,9 @@ namespace PoeItemInfo.Transport
 	{
 		bool Authenticate(string email, SecureString securePassword, bool useSessionId);
 		string GetStashJson(int index, string league);
+		string GetCharactersJson();
+
+		string GetCharacterTabJson(string character);
 	}
 
 	public class HttpTransport : IHttpTransport
@@ -91,12 +94,33 @@ namespace PoeItemInfo.Transport
 		{
 			var request = GetHttpRequest(HttpMethod.GET, string.Format(stashURL, league, index));
 			var response = (HttpWebResponse)request.GetResponse();
+
+			return ReadAll(response);
+		}
+
+		public string GetCharactersJson()
+		{
+			var request = GetHttpRequest(HttpMethod.GET, characterURL);
+			var response = (HttpWebResponse)request.GetResponse();
+
+			return ReadAll(response);
+		}
+
+		public string GetCharacterTabJson(string character)
+		{
+			var request = GetHttpRequest(HttpMethod.GET, string.Format(inventoryURL, character));
+			var response = (HttpWebResponse)request.GetResponse();
+
+			return ReadAll(response);
+		}
+
+		private static string ReadAll(HttpWebResponse response)
+		{
 			using (var reader = new StreamReader(response.GetResponseStream()))
 			{
 				return reader.ReadToEnd();
 			}
 		}
-
 
 		//public Stream GetStash(int index, string league, bool refresh)
 		//{
