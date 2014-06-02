@@ -57,14 +57,14 @@ namespace PoeItemInfo.Website.Api
 			return predicates.Aggregate(list, (current, predicate) => current.Where(predicate.Invoke)).AsQueryable();
 		}
 
-		private IEnumerable<ItemType> LoadItemTypeMap()
+		private List<BaseType> LoadItemTypeMap()
 		{
-			var filename = Path.Combine(Settings.Default.DataBaseDirectory, "categories.json");
+			var filename = Path.Combine(Settings.Default.DataBaseDirectory, "typeMap.json");
 			if (!File.Exists(filename))
-				return new ItemType[0];
+				return new List<BaseType>();
 
 			var contents = File.ReadAllText(filename);
-			return JsonConvert.DeserializeObject<IEnumerable<ItemType>>(contents);
+			return JsonConvert.DeserializeObject<List<BaseType>>(contents);
 		}
 
 		public IQueryable<Item> Post(IEnumerable<SimpleSpecification> specifications)

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace PoeItemInfo.Model
@@ -21,9 +22,16 @@ namespace PoeItemInfo.Model
 		public IEnumerable<Item> SocketedItems { get; set; }
 		public int FrameType { get; set; }
 		public ItemType ItemType { get; set; }
-		
-		public string BaseType { get { return ItemType.BaseType; } }
-		public string Category { get { return ItemType.Category.ToString(); } }
+
+		public string BaseType
+		{
+			get { return ItemType.BaseType; }
+		}
+
+		public string Category
+		{
+			get { return ItemType.Category.ToString(); }
+		}
 	}
 
 	public class ItemProperty
@@ -40,8 +48,8 @@ namespace PoeItemInfo.Model
 
 	public interface IItemMod
 	{
-		string Name { get;  }
-		string DisplayText { get;  }
+		string Name { get; }
+		string DisplayText { get; }
 	}
 
 	public interface IItemModFactory
@@ -55,10 +63,16 @@ namespace PoeItemInfo.Model
 		public int X { get; set; }
 		public int Y { get; set; }
 		public string Tab { get; set; }
+		public int Index { get; set; }
 	}
 
 	public class ItemType
 	{
+		public static string UnknownBaseType
+		{
+			get { return "Unknown"; }
+		}
+
 		public string Type { get; set; }
 		public ItemCategories Category { get; set; }
 		public string BaseType { get; set; }
@@ -79,5 +93,12 @@ namespace PoeItemInfo.Model
 		Jewelery,
 		SkillGem,
 		Currency,
+	}
+
+	[DebuggerDisplay("{Name}")]
+	public class BaseType
+	{
+		public string Name { get; set; }
+		public List<string> TypeLines { get; set; }
 	}
 }
