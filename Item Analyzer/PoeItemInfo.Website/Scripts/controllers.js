@@ -45,7 +45,7 @@
 				});
 		};
 	})
-	.controller("stashController", function($scope, $http, $timeout) {
+	.controller("stashController", function($scope, $http) {
 		$scope.GetTab = function(index, callback) {
 			$http.get("api/stash/GetTab/?stashTab=" + index)
 				.success(function(data, status, headers, config) {
