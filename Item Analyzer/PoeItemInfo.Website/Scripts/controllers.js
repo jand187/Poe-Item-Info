@@ -11,6 +11,11 @@
 				controller: "stashController",
 				templateUrl: "Spa/partials/stashList.html"
 			})
+			.when("/basetypes/edit",
+			{
+				controller: "baseTypesController",
+				templateUrl: "Spa/partials/basetypesEdit.html"
+			})
 			.when("/categories",
 			{
 				controller: "editCategoriesController",
@@ -59,4 +64,40 @@
 		};
 
 		$scope.GetTab(0);
+	})
+	.controller("baseTypesController", function($scope, $http) {
+		$scope.keyword = "";
+		$scope.typeMap = [];
+		$scope.GetTypeLines = function() {
+			$http.get("api/baseTypes/GetTypeLines/?keyword=" + $scope.keyword)
+				.success(function(data, status, headers, config) {
+					$scope.typeLines = data;
+				});
+		};
+
+		$scope.GetTypes = function() {
+			$http.get("api/baseTypes/GetTypes")
+				.success(function(data, status, headers, config) {
+					$scope.types = data;
+				});
+		};
+
+		$scope.AssignType = function(typeLine, type) {
+			var mapItem = {
+				typeLine: typeLine,
+				type: type
+			};
+
+			$scope.typeMap.push(mapItem);
+		};
+
+		$scope.SaveTypeMap = function() {
+			$http.post("api/baseTypes/SaveTypeMap", $scope.typeMap)
+				.success(function(data, status, headers, config) {
+					$scope.typeMap = [];
+					$scope.GetTypeLines();
+				});
+		};
+		$scope.GetTypeLines();
+		$scope.GetTypes();
 	});

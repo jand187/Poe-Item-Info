@@ -1,0 +1,21 @@
+﻿<h3>Basetypes ({{typeLines.length}})</h3>
+
+<pre>
+	{{typeMap}}
+</pre>
+<button type="button" ng-click="SaveTypeMap()">Save</button>
+<div>
+	Keyword: <input type="text" ng-model="keyword" /><button type="button" ng-click="GetTypeLines()">Refresh</button>
+</div>
+<ul>
+	<li ng-repeat="typeLine in typeLines" class="item-box">
+		<div class="section">
+			<div class="section padded">
+				<a href="http://pathofexile.gamepedia.com/index.php?search={{typeLine}}" target="new">{{typeLine}}</a>
+			</div>
+			<div class="section padded">
+				<button ng-repeat="type in types" type="button" ng-click="AssignType(typeLine, type)" class="btn btn-xs btn-primary margin-xs">{{type}}</button>
+			</div>
+		</div>
+	</li>
+</ul>
