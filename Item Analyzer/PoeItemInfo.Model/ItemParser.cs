@@ -50,6 +50,7 @@ namespace PoeItemInfo.Model
 				FrameType = item.frameType,
 				Location = new ItemLocation
 				{
+					Index = GetTabIndex(item.inventoryId),
 					Tab = GetTabName(item.inventoryId, tabs),
 					InventoryId = item.inventoryId,
 					X = item.x,
@@ -60,12 +61,20 @@ namespace PoeItemInfo.Model
 			};
 		}
 
+		private int GetTabIndex(string inventoryId)
+		{
+			if (string.IsNullOrWhiteSpace(inventoryId))
+				return -1;
+
+			return Convert.ToInt32(Regex.Replace(inventoryId, @"^[^\d)]*", "")) - 1;
+		}
+
 		private string GetTabName(string inventoryId, IEnumerable<Tab> tabs)
 		{
 			if (string.IsNullOrWhiteSpace(inventoryId))
 				return "unknown";
 
-			var tabId = Convert.ToInt32(Regex.Replace(inventoryId, @"^[^\d)]*", "")) - 1;
+			var tabId = GetTabIndex(inventoryId);
 			var tab = tabs.SingleOrDefault(t => t.i == tabId);
 			return tab != null ? tab.n : "unknown";
 		}
